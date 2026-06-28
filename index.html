@@ -672,7 +672,9 @@ const DEF_STOPS = [
 // INIT
 // ================================================================
 function initApp() {
-  if (!DB.get('settings')) DB.set('settings', DEF_SETTINGS);
+  // नेहमी DEF_SETTINGS सोबत merge करा — जुन्या settings मध्ये devId/devPass नसल्यास add होईल
+  const saved = DB.get('settings') || {};
+  DB.set('settings', { ...DEF_SETTINGS, ...saved });
   if (!DB.get('users')) DB.set('users', DEF_USERS);
   if (!DB.get('stops')) DB.set('stops', DEF_STOPS);
   if (!DB.get('trips')) DB.set('trips', []);
@@ -754,27 +756,31 @@ function doLogin() {
   const err = document.getElementById('login-err');
   err.style.display = 'none';
 
+  if (!uid || !pass) { err.style.display = 'block'; err.textContent = '⚠️ ID आणि पासवर्ड दोन्ही टाका'; return; }
+
   const s = getSettings();
   // Check developer
-  if (uid === s.devId && pass === s.devPass) {
+  const devId = s.devId || DEF_SETTINGS.devId;
+  const devPass = s.devPass || DEF_SETTINGS.devPass;
+  if (uid === devId && pass === devPass) {
     currentUser = { id: uid, role: 'developer', name: 'Developer' };
     showScreen('developer');
     initDevScreen();
     return;
   }
-  // Check other users
+  // Check other users — DB मध्ये नसल्यास DEF_USERS वापर
   const users = DB.get('users') || DEF_USERS;
   const user = users.find(u => u.id === uid && u.pass === pass);
-  if (!user) { err.style.display = 'block'; return; }
+  if (!user) { err.style.display = 'block'; err.textContent = '❌ चुकीचा ID किंवा पासवर्ड'; return; }
   currentUser = user;
   if (user.role === 'user') {
     showScreen('driver');
     initDrvScreen();
+    startGPS();
   } else if (user.role === 'admin') {
     showScreen('admin');
     initAdmScreen();
   }
-  startGPS();
 }
 
 function logout() {
