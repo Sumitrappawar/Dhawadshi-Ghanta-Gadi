@@ -673,19 +673,13 @@ const DEF_STOPS = [
 // INIT
 // ================================================================
 function initApp() {
-  // scriptUrl नेहमी hardcoded value वापर — localStorage override नको
-  const saved = DB.get('settings') || {};
-  const merged = { ...DEF_SETTINGS, ...saved };
-  // Hardcoded URLs नेहमी force करा
-  merged.scriptUrl = DEF_SETTINGS.scriptUrl;
-  merged.sheetUrl  = DEF_SETTINGS.sheetUrl;
-  // devId/devPass नसल्यास default लावा
-  if (!merged.devId)   merged.devId   = DEF_SETTINGS.devId;
-  if (!merged.devPass) merged.devPass = DEF_SETTINGS.devPass;
-  DB.set('settings', merged);
-  if (!DB.get('users')) DB.set('users', DEF_USERS);
-  if (!DB.get('stops')) DB.set('stops', DEF_STOPS);
-  if (!DB.get('trips')) DB.set('trips', []);
+  // जुन्या trips वाचवा
+  const oldTrips = DB.get('trips') || [];
+  // Settings, users, stops नेहमी fresh reset करा — जुना corrupt data जाईल
+  DB.set('settings', { ...DEF_SETTINGS });
+  DB.set('users', [...DEF_USERS]);
+  DB.set('stops', [...DEF_STOPS]);
+  DB.set('trips', oldTrips);
   applySettings();
   checkDevHint();
   updateSyncBadge();
