@@ -647,7 +647,8 @@ const DEF_SETTINGS = {
   color: '#1a6b3a',
   defaultRate: 150,
   fenceMeters: 10,
-  scriptUrl: '',
+  scriptUrl: 'https://script.google.com/macros/s/AKfycbwTu9x5OkDeXcv1PfVv69TZYJVD2HhggDJhk-f1tUgaGA6KcrWkp2r5yGlMjeDtrbhDjA/exec',
+  sheetUrl: 'https://docs.google.com/spreadsheets/d/1fPTBp_4H3F5nUHuCNsAXOL3wHt0MtHASLtPzFg-6GZY/edit',
   autoSync: true,
   drvPhone: '',
   srpPhone: '',
@@ -672,9 +673,16 @@ const DEF_STOPS = [
 // INIT
 // ================================================================
 function initApp() {
-  // नेहमी DEF_SETTINGS सोबत merge करा — जुन्या settings मध्ये devId/devPass नसल्यास add होईल
+  // scriptUrl नेहमी hardcoded value वापर — localStorage override नको
   const saved = DB.get('settings') || {};
-  DB.set('settings', { ...DEF_SETTINGS, ...saved });
+  const merged = { ...DEF_SETTINGS, ...saved };
+  // Hardcoded URLs नेहमी force करा
+  merged.scriptUrl = DEF_SETTINGS.scriptUrl;
+  merged.sheetUrl  = DEF_SETTINGS.sheetUrl;
+  // devId/devPass नसल्यास default लावा
+  if (!merged.devId)   merged.devId   = DEF_SETTINGS.devId;
+  if (!merged.devPass) merged.devPass = DEF_SETTINGS.devPass;
+  DB.set('settings', merged);
   if (!DB.get('users')) DB.set('users', DEF_USERS);
   if (!DB.get('stops')) DB.set('stops', DEF_STOPS);
   if (!DB.get('trips')) DB.set('trips', []);
@@ -725,14 +733,13 @@ function lightenColor(hex) {
 
 function checkDevHint() {
   const s = getSettings();
-  const trips = DB.get('trips') || [];
-  const users = DB.get('users') || [];
-  // Show dev hint if no script URL set
   const hint = document.getElementById('dev-hint');
-  if (!s.scriptUrl || users.length === 0) {
+  // Users DB मध्ये नसल्यासच hint दाखवा
+  const users = DB.get('users') || [];
+  if (users.length === 0) {
     hint.style.display = 'block';
-    document.getElementById('hint-id').textContent = s.devId || 'dev1';
-    document.getElementById('hint-pass').textContent = s.devPass || 'dev@2024';
+    document.getElementById('hint-id').textContent = s.devId || DEF_SETTINGS.devId;
+    document.getElementById('hint-pass').textContent = s.devPass || DEF_SETTINGS.devPass;
   } else {
     hint.style.display = 'none';
   }
