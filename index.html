@@ -33,16 +33,11 @@
   --radius: 12px;
   --radius-sm: 8px;
   --shadow: 0 2px 12px rgba(0,0,0,0.08);
-  --app-name: "ग्राम गाडी ट्रॅकर";
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--gray); color: var(--text); min-height: 100vh; overflow-x: hidden; }
-
-/* SCREENS */
 .screen { display: none; min-height: 100vh; flex-direction: column; }
 .screen.active { display: flex; }
-
-/* TOPBAR */
 .topbar { background: var(--primary); color: white; padding: 14px 16px 12px; display: flex; align-items: center; gap: 10px; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
 .topbar-logo { font-size: 26px; line-height: 1; }
 .topbar-info { flex: 1; min-width: 0; }
@@ -50,8 +45,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .topbar-sub { font-size: 11px; opacity: 0.75; margin-top: 1px; }
 .topbar-btn { background: rgba(255,255,255,0.15); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; flex-shrink: 0; }
 .topbar-btn:active { background: rgba(255,255,255,0.3); }
-
-/* BOTTOM NAV */
 .bottom-nav { background: white; border-top: 1px solid var(--border); display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; padding-bottom: env(safe-area-inset-bottom); }
 .nav-item { flex: 1; padding: 8px 2px 6px; display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; border: none; background: none; color: var(--text3); font-size: 9px; font-weight: 500; transition: color 0.2s; min-width: 0; }
 .nav-item.active { color: var(--primary); }
@@ -60,7 +53,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .content { flex: 1; padding: 14px; padding-bottom: 80px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 
 /* LOGIN */
-#login-screen { background: linear-gradient(160deg, var(--primary) 0%, var(--primary-dark) 100%); align-items: center; justify-content: center; padding: 24px; min-height: 100vh; }
+#screen-login { background: linear-gradient(160deg, var(--primary) 0%, var(--primary-dark) 100%); align-items: center; justify-content: center; padding: 24px; min-height: 100vh; }
 .login-logo { text-align: center; margin-bottom: 28px; }
 .login-logo-icon { font-size: 72px; line-height: 1; margin-bottom: 10px; }
 .login-logo h1 { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
@@ -71,22 +64,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .form-label { display: block; font-size: 12px; color: var(--text2); margin-bottom: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
 .form-input { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 15px; color: var(--text); background: white; transition: border-color 0.2s; -webkit-appearance: none; }
 .form-input:focus { outline: none; border-color: var(--primary); }
-.btn-login { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: var(--radius-sm); font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 4px; letter-spacing: 0.02em; }
-.btn-login:active { background: var(--primary-mid); transform: scale(0.99); }
+.btn-login { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: var(--radius-sm); font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 4px; }
+.btn-login:active { opacity: 0.9; transform: scale(0.99); }
 .login-error { color: var(--red); font-size: 13px; margin-top: 10px; text-align: center; display: none; padding: 8px; background: var(--red-light); border-radius: var(--radius-sm); }
 .dev-hint { margin-top: 14px; padding: 10px 12px; background: var(--blue-light); border-radius: var(--radius-sm); font-size: 12px; color: var(--blue); line-height: 1.6; }
 
-/* CARDS */
+/* CARDS & STATS */
 .card { background: white; border-radius: var(--radius); padding: 15px; margin-bottom: 11px; box-shadow: var(--shadow); }
 .card-title { font-size: 13px; font-weight: 700; color: var(--text2); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.03em; }
-
-/* STAT */
 .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 11px; }
 .stat-box { background: white; border-radius: var(--radius); padding: 14px 12px; text-align: center; box-shadow: var(--shadow); }
 .stat-num { font-size: 26px; font-weight: 800; color: var(--primary); line-height: 1; }
 .stat-lbl { font-size: 11px; color: var(--text3); margin-top: 4px; font-weight: 500; }
 
-/* BADGE */
+/* BADGES */
 .badge { display: inline-block; padding: 3px 9px; border-radius: 99px; font-size: 11px; font-weight: 700; }
 .badge-green { background: var(--primary-light); color: var(--primary); }
 .badge-amber { background: var(--amber-light); color: var(--amber); }
@@ -123,7 +114,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .cam-placeholder p { font-size: 13px; }
 .cam-controls { padding: 12px 14px; display: flex; gap: 8px; }
 
-/* PAYMENT SUMMARY */
+/* PAYMENT */
 .pay-summary { background: var(--primary); color: white; border-radius: var(--radius); padding: 18px; margin-bottom: 11px; }
 .pay-summary .ps-label { font-size: 12px; opacity: 0.75; font-weight: 500; }
 .pay-summary .ps-amount { font-size: 34px; font-weight: 800; margin: 3px 0; letter-spacing: -1px; }
@@ -156,6 +147,18 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .d-amount { font-size: 17px; font-weight: 800; color: var(--primary); }
 .d-albl { font-size: 10px; color: var(--text3); }
 
+/* TRIP CARD */
+.trip-card { background: white; border-radius: var(--radius); padding: 14px; margin-bottom: 10px; box-shadow: var(--shadow); border-left: 4px solid var(--primary); }
+.trip-card.complete { border-left-color: var(--amber); }
+.trip-card.paid { border-left-color: #2ecc71; }
+.trip-route { font-size: 15px; font-weight: 800; color: var(--text); }
+.trip-meta { font-size: 12px; color: var(--text3); margin-top: 3px; }
+.trip-stages { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.stage-pill { padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 700; }
+.stage-done { background: var(--primary-light); color: var(--primary); }
+.stage-pending { background: var(--gray2); color: var(--text3); }
+.stage-current { background: var(--amber-light); color: var(--amber); border: 1.5px solid var(--amber); }
+
 /* BILL */
 .bill-box { background: white; border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); margin-bottom: 11px; }
 .bill-head { text-align: center; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 2px solid var(--primary); }
@@ -174,7 +177,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .sr-left { flex: 1; min-width: 0; }
 .sr-label { font-size: 14px; font-weight: 600; color: var(--text); }
 .sr-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
-.sr-value { font-size: 13px; font-weight: 700; color: var(--primary); text-align: right; }
 .sr-input { width: 100%; padding: 8px 10px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 14px; margin-top: 6px; -webkit-appearance: none; }
 .sr-input:focus { outline: none; border-color: var(--primary); }
 .toggle { width: 46px; height: 26px; border-radius: 13px; background: var(--border); position: relative; cursor: pointer; border: none; transition: background 0.25s; flex-shrink: 0; }
@@ -186,7 +188,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .field { margin-bottom: 12px; }
 .field label { display: block; font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.03em; }
 .field input, .field select, .field textarea { width: 100%; padding: 11px 13px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; color: var(--text); background: white; -webkit-appearance: none; }
-.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--primary); }
+.field input:focus, .field select:focus { outline: none; border-color: var(--primary); }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
 /* PHOTO GRID */
@@ -197,7 +199,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .pci-stop { font-size: 11px; font-weight: 700; color: white; }
 .pci-time { font-size: 10px; color: rgba(255,255,255,0.8); }
 
-/* LOCATION ITEM */
+/* LOCATION */
 .loc-item { background: white; border-radius: var(--radius); padding: 13px 14px; margin-bottom: 9px; box-shadow: var(--shadow); }
 .loc-name { font-size: 15px; font-weight: 700; }
 .loc-coords { font-size: 11px; color: var(--text3); font-family: monospace; margin-top: 3px; }
@@ -214,40 +216,47 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .modal-title { font-size: 17px; font-weight: 800; margin-bottom: 16px; }
 .modal-close { float: right; background: var(--gray2); border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 14px; }
 
-/* INFO / WARN BOXES */
+/* INFO BOXES */
 .info-box { background: var(--blue-light); color: var(--blue); border-radius: var(--radius-sm); padding: 11px 13px; font-size: 12px; line-height: 1.6; }
 .warn-box { background: var(--amber-light); color: var(--amber); border-radius: var(--radius-sm); padding: 11px 13px; font-size: 12px; line-height: 1.6; }
 .success-box { background: var(--primary-light); color: var(--primary); border-radius: var(--radius-sm); padding: 11px 13px; font-size: 12px; line-height: 1.6; }
 
-/* EMPTY STATE */
+/* EMPTY */
 .empty { text-align: center; padding: 36px 16px; color: var(--text3); }
 .empty-icon { font-size: 44px; margin-bottom: 10px; }
 .empty-text { font-size: 14px; }
 
 /* UTILS */
-.mt-8 { margin-top: 8px; }
-.mt-12 { margin-top: 12px; }
-.mt-16 { margin-top: 16px; }
+.mt-8 { margin-top: 8px; } .mt-12 { margin-top: 12px; } .mt-16 { margin-top: 16px; }
 .flex-row { display: flex; align-items: center; gap: 8px; }
 .flex-space { display: flex; justify-content: space-between; align-items: center; }
 .flex-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
 .divider { height: 1px; background: var(--gray2); margin: 12px 0; }
 .text-center { text-align: center; }
 .bold { font-weight: 700; }
+.section-label { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin: 14px 0 7px; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .spinner { display: inline-block; width: 16px; height: 16px; border: 2.5px solid rgba(255,255,255,0.35); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
 @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.4} }
 .live-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #2ecc71; animation: pulse 1.4s infinite; margin-right: 4px; }
-.section-label { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin: 14px 0 7px; }
-
-/* SYNC STATUS */
 .sync-badge { position: fixed; top: 60px; right: 10px; background: var(--amber); color: white; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 99px; z-index: 150; display: none; }
 .sync-badge.show { display: block; }
+
+/* STAGE PROGRESS BAR */
+.stage-progress { display: flex; align-items: center; gap: 0; margin: 10px 0; overflow-x: auto; padding-bottom: 4px; }
+.stage-step { display: flex; align-items: center; flex-shrink: 0; }
+.stage-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; }
+.stage-dot.done { background: var(--primary); color: white; }
+.stage-dot.current { background: var(--amber); color: white; border: 2px solid var(--amber); }
+.stage-dot.pending { background: var(--gray2); color: var(--text3); }
+.stage-line { width: 24px; height: 3px; background: var(--gray2); flex-shrink: 0; }
+.stage-line.done { background: var(--primary); }
+.stage-label { font-size: 9px; color: var(--text3); text-align: center; margin-top: 3px; max-width: 50px; line-height: 1.2; }
+.stage-col { display: flex; flex-direction: column; align-items: center; }
 </style>
 </head>
 <body>
 
-<!-- SYNC INDICATOR -->
 <div class="sync-badge" id="sync-badge">⏳ Sync pending</div>
 
 <!-- ========== LOGIN SCREEN ========== -->
@@ -270,8 +279,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     <button class="btn-login" onclick="doLogin()">लॉगिन करा →</button>
     <div class="login-error" id="login-err">❌ चुकीचा ID किंवा पासवर्ड</div>
     <div class="dev-hint" id="dev-hint" style="display:none;">
-      <strong>⚙️ Developer Setup आवश्यक</strong><br>
-      पहिल्यांदा: <strong id="hint-id">dev1</strong> / <strong id="hint-pass">dev@2024</strong> ने login करा
+      <strong>⚙️ Developer:</strong> <span id="hint-id">dev1</span> / <span id="hint-pass">dev@2024</span>
     </div>
   </div>
 </div>
@@ -284,7 +292,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
       <div class="topbar-title" id="drv-app-name">ग्राम गाडी ट्रॅकर</div>
       <div class="topbar-sub" id="drv-user-name">चालक</div>
     </div>
-    <button class="topbar-btn" onclick="logout()" title="Logout">🚪</button>
+    <button class="topbar-btn" onclick="logout()">🚪</button>
   </div>
 
   <!-- HOME TAB -->
@@ -292,11 +300,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     <div class="stat-grid">
       <div class="stat-box">
         <div class="stat-num" id="drv-today-trips">0</div>
-        <div class="stat-lbl">आजच्या फेऱ्या</div>
+        <div class="stat-lbl">आजच्या trips</div>
       </div>
       <div class="stat-box">
-        <div class="stat-num" id="drv-today-amt">₹0</div>
-        <div class="stat-lbl">आजचे पैसे</div>
+        <div class="stat-num" id="drv-pending-pay">₹0</div>
+        <div class="stat-lbl">मिळायचे पैसे</div>
       </div>
     </div>
     <div class="card">
@@ -304,50 +312,80 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <span class="live-dot"></span>
         <span id="drv-gps-txt" style="font-size:12px; color:var(--text2);">GPS शोधत आहे...</span>
       </div>
-      <button class="btn btn-primary btn-full" style="font-size:15px;" onclick="showDrvTab('camera')">📸 फोटो काढा — थांबा नोंद करा</button>
+      <button class="btn btn-primary btn-full" style="font-size:15px;" onclick="showDrvTab('trip')">🚍 नवीन Trip सुरू करा</button>
     </div>
-    <div class="section-label">आजचे फोटो</div>
-    <div id="drv-today-photos">
-      <div class="empty"><div class="empty-icon">📷</div><div class="empty-text">अजून फोटो नाही</div></div>
+    <div class="section-label">चालू Trip</div>
+    <div id="drv-active-trip">
+      <div class="empty"><div class="empty-icon">🚍</div><div class="empty-text">सध्या कोणतीही trip चालू नाही</div></div>
     </div>
-    <div class="section-label">या महिन्याचे पैसे</div>
-    <div class="pay-summary">
-      <div class="ps-label">एकूण देय रक्कम</div>
-      <div class="ps-amount" id="drv-month-total">₹0</div>
-      <div class="ps-sub" id="drv-month-lbl">—</div>
+    <div class="section-label">आजच्या Trips</div>
+    <div id="drv-today-list">
+      <div class="empty"><div class="empty-icon">📋</div><div class="empty-text">आज कोणतीही trip नाही</div></div>
     </div>
   </div>
 
-  <!-- CAMERA TAB -->
-  <div class="content tab-panel" id="drv-camera">
-    <div class="card" style="margin-bottom:11px;">
-      <label class="form-label">थांबा निवडा</label>
-      <select class="form-input" id="stop-sel" onchange="onStopChange()" style="margin-top:4px;">
-        <option value="">— थांबा निवडा —</option>
-      </select>
+  <!-- TRIP TAB -->
+  <div class="content tab-panel" id="drv-trip">
+    <!-- Step 1: Route select (shown when no active trip) -->
+    <div id="trip-select-ui">
+      <div class="card">
+        <div class="card-title">🚍 नवीन Trip</div>
+        <div class="field">
+          <label>From — सुरुवातीचा थांबा</label>
+          <select class="form-input" id="trip-from">
+            <option value="">— थांबा निवडा —</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>To — शेवटचा थांबा</label>
+          <select class="form-input" id="trip-to">
+            <option value="">— थांबा निवडा —</option>
+          </select>
+        </div>
+        <div id="trip-dup-warn" style="display:none;" class="warn-box" style="margin-bottom:8px;">⚠️ हा route आज आधीच पूर्ण झाला आहे!</div>
+        <button class="btn btn-primary btn-full mt-8" onclick="startTrip()">🚀 Trip सुरू करा</button>
+      </div>
+      <div class="info-box">💡 Trip सुरू केल्यावर प्रत्येक stage वर GPS फोटो काढावा लागेल. सर्व stages पूर्ण झाल्यावरच trip complete होईल.</div>
     </div>
-    <div id="geo-box" style="display:none;" class="geo-status geo-warn">
-      <span id="geo-icon">📍</span>
-      <span id="geo-txt">GPS तपासत आहे...</span>
-    </div>
-    <div class="camera-wrap">
-      <div class="camera-view">
-        <video id="cam-video" autoplay playsinline muted></video>
-        <canvas id="cam-canvas"></canvas>
-        <img id="cam-preview" alt="फोटो">
-        <div class="cam-placeholder" id="cam-ph">
-          <div class="ci">📸</div>
-          <p>खाली बटण दाबून कॅमेरा सुरू करा</p>
+
+    <!-- Step 2: Active trip camera UI -->
+    <div id="trip-active-ui" style="display:none;">
+      <div class="card" style="border-left:4px solid var(--amber);">
+        <div class="card-title" id="active-trip-label">🚍 Trip चालू आहे</div>
+        <div class="flex-space">
+          <div>
+            <div style="font-size:13px;font-weight:700;" id="active-route-label">—</div>
+            <div style="font-size:11px;color:var(--text3);" id="active-stage-label">Stage: —</div>
+          </div>
+          <span class="badge badge-amber">चालू</span>
+        </div>
+        <div class="stage-progress mt-8" id="active-stage-progress"></div>
+      </div>
+
+      <div id="trip-geo-box" style="display:none;" class="geo-status geo-warn">
+        <span id="trip-geo-icon">📍</span>
+        <span id="trip-geo-txt">GPS तपासत आहे...</span>
+      </div>
+
+      <div class="camera-wrap">
+        <div class="camera-view">
+          <video id="cam-video" autoplay playsinline muted></video>
+          <canvas id="cam-canvas"></canvas>
+          <img id="cam-preview" alt="फोटो">
+          <div class="cam-placeholder" id="cam-ph">
+            <div class="ci">📸</div>
+            <p id="cam-ph-txt">कॅमेरा सुरू करा</p>
+          </div>
+        </div>
+        <div class="cam-controls">
+          <button class="btn btn-outline" style="flex:1;" id="btn-startcam" onclick="startCam()">📷 कॅमेरा</button>
+          <button class="btn btn-primary" style="flex:1;display:none;" id="btn-capture" onclick="capturePhoto()">⚡ फोटो काढा</button>
+          <button class="btn btn-gray" style="flex:1;display:none;" id="btn-retake" onclick="retakeCam()">🔄 पुन्हा काढा</button>
         </div>
       </div>
-      <div class="cam-controls">
-        <button class="btn btn-outline" style="flex:1;" id="btn-startcam" onclick="startCam()">📷 कॅमेरा</button>
-        <button class="btn btn-primary" style="flex:1;display:none;" id="btn-capture" onclick="capturePhoto()">⚡ फोटो काढा</button>
-        <button class="btn btn-gray" style="flex:1;display:none;" id="btn-retake" onclick="retakeCam()">🔄 पुन्हा</button>
-      </div>
+      <button class="btn btn-primary btn-full" id="btn-savephoto" style="display:none;" onclick="saveStagePhoto()">✅ Stage फोटो सेव्ह करा</button>
+      <div class="info-box mt-8" id="stage-info-box">⚠️ फोटो फक्त ठरलेल्या थांब्याच्या <strong id="fence-dist-lbl">10</strong> मीटरच्या आत काढता येईल.</div>
     </div>
-    <button class="btn btn-primary btn-full" id="btn-savephoto" style="display:none;" onclick="saveEntry()">✅ सेव्ह करा व पुढे जा</button>
-    <div class="info-box mt-12">⚠️ फोटो फक्त ठरलेल्या थांब्याच्या <strong id="fence-dist-lbl">10</strong> मीटरच्या आत काढता येईल. GPS location आपोआप जोडले जाईल.</div>
   </div>
 
   <!-- PAYMENTS TAB -->
@@ -359,7 +397,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 
   <nav class="bottom-nav" id="drv-nav">
     <button class="nav-item active" onclick="showDrvTab('home')"><div class="nav-icon">🏠</div>मुख्यपान</button>
-    <button class="nav-item" onclick="showDrvTab('camera')"><div class="nav-icon">📸</div>फोटो काढा</button>
+    <button class="nav-item" onclick="showDrvTab('trip')"><div class="nav-icon">🚍</div>Trip</button>
     <button class="nav-item" onclick="showDrvTab('payments')"><div class="nav-icon">💰</div>पेमेंट</button>
   </nav>
 </div>
@@ -378,23 +416,23 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <!-- DASHBOARD TAB -->
   <div class="content tab-panel active" id="adm-dash">
     <div class="stat-grid">
-      <div class="stat-box">
-        <div class="stat-num" id="adm-trips">0</div>
-        <div class="stat-lbl">फेऱ्या (महिना)</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num" id="adm-total">₹0</div>
-        <div class="stat-lbl">देय रक्कम (महिना)</div>
-      </div>
+      <div class="stat-box"><div class="stat-num" id="adm-trips">0</div><div class="stat-lbl">Trips (महिना)</div></div>
+      <div class="stat-box"><div class="stat-num" id="adm-total">₹0</div><div class="stat-lbl">देय रक्कम</div></div>
     </div>
     <div class="section-label">चालक यादी</div>
-    <div id="adm-drivers">
-      <div class="empty"><div class="empty-icon">👤</div><div class="empty-text">चालक नोंदवलेले नाहीत</div></div>
+    <div id="adm-drivers"></div>
+  </div>
+
+  <!-- TRIPS TAB (Active/Complete/Paid) -->
+  <div class="content tab-panel" id="adm-trips-tab">
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="showAdmTripsTab('active')">🟡 Active</button>
+      <button class="tab-btn" onclick="showAdmTripsTab('complete')">✅ Complete</button>
+      <button class="tab-btn" onclick="showAdmTripsTab('paid')">💚 Paid</button>
     </div>
-    <div class="section-label">आजचे फोटो लॉग</div>
-    <div id="adm-photos">
-      <div class="empty"><div class="empty-icon">📷</div><div class="empty-text">आज फोटो नाहीत</div></div>
-    </div>
+    <div id="adm-trips-active"></div>
+    <div id="adm-trips-complete" style="display:none;"></div>
+    <div id="adm-trips-paid" style="display:none;"></div>
   </div>
 
   <!-- BILL TAB -->
@@ -426,32 +464,24 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
           <p id="bill-drv-name">चालक: —</p>
         </div>
         <table class="bill-tbl">
-          <thead><tr><th>दिनांक</th><th>थांबे</th><th>फेऱ्या</th><th>रक्कम</th></tr></thead>
+          <thead><tr><th>तारीख</th><th>Route</th><th>Payment</th><th>रक्कम</th></tr></thead>
           <tbody id="bill-body"></tbody>
           <tfoot><tr><td colspan="3"><strong>एकूण</strong></td><td id="bill-grand"><strong>₹0</strong></td></tr></tfoot>
         </table>
       </div>
       <div style="display:flex;flex-direction:column;gap:9px;">
-        <button class="btn btn-primary btn-full" onclick="printBill()">🖨️ Print / PDF डाउनलोड</button>
+        <button class="btn btn-primary btn-full" onclick="printBill()">🖨️ Print / PDF</button>
         <button class="btn btn-full" style="background:#25D366;color:white;" onclick="waDriver()">📱 WhatsApp → चालक</button>
         <button class="btn btn-full" style="background:#25D366;color:white;" onclick="waSarpanch()">📱 WhatsApp → सरपंच</button>
-        <button class="btn btn-outline btn-full" onclick="syncSheets()">📊 Google Sheets Sync</button>
+        <button class="btn btn-outline btn-full" onclick="syncAllNow()">📊 Google Sheets Sync</button>
       </div>
     </div>
   </div>
 
-  <!-- REPORTS TAB -->
-  <div class="content tab-panel" id="adm-reports">
-    <div class="section-label">सर्व फेऱ्यांचा इतिहास</div>
-    <div id="adm-all-logs">
-      <div class="empty"><div class="empty-icon">📊</div><div class="empty-text">अजून records नाहीत</div></div>
-    </div>
-  </div>
-
   <nav class="bottom-nav" id="adm-nav">
-    <button class="nav-item active" onclick="showAdmTab('dash')"><div class="nav-icon">📊</div>डॅशबोर्ड</button>
+    <button class="nav-item active" onclick="showAdmTab('dash')"><div class="nav-icon">📊</div>Dashboard</button>
+    <button class="nav-item" onclick="showAdmTab('trips-tab')"><div class="nav-icon">🚍</div>Trips</button>
     <button class="nav-item" onclick="showAdmTab('bill')"><div class="nav-icon">📋</div>बिल</button>
-    <button class="nav-item" onclick="showAdmTab('reports')"><div class="nav-icon">📁</div>अहवाल</button>
   </nav>
 </div>
 
@@ -468,94 +498,86 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 
   <!-- SETTINGS TAB -->
   <div class="content tab-panel active" id="dev-settings">
-    <!-- App Identity -->
     <div class="settings-group">
-      <div class="sg-title">🎨 App Identity (Logo व नाव)</div>
-      <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px;">
-        <div class="sr-label">App चे नाव</div>
-        <input class="sr-input" id="cfg-app-name" placeholder="ग्राम गाडी ट्रॅकर">
+      <div class="sg-title">🎨 App Identity</div>
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+        <div class="sr-label">App चे नाव</div><input class="sr-input" id="cfg-app-name" placeholder="ग्राम गाडी ट्रॅकर">
       </div>
-      <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px;">
-        <div class="sr-label">App Tagline</div>
-        <input class="sr-input" id="cfg-tagline" placeholder="ग्रामपंचायत वाहन व्यवस्थापन">
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+        <div class="sr-label">App Tagline</div><input class="sr-input" id="cfg-tagline" placeholder="ग्रामपंचायत वाहन व्यवस्थापन">
       </div>
-      <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px;">
-        <div class="sr-label">Logo (Emoji)</div>
-        <input class="sr-input" id="cfg-logo" placeholder="🚌" maxlength="4">
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+        <div class="sr-label">Logo (Emoji)</div><input class="sr-input" id="cfg-logo" placeholder="🚌" maxlength="4">
       </div>
-      <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px;">
-        <div class="sr-label">ग्रामपंचायतीचे नाव (बिलावर)</div>
-        <input class="sr-input" id="cfg-gram-name" placeholder="श्री. ग्रामपंचायत, गाव">
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+        <div class="sr-label">ग्रामपंचायतीचे नाव (बिलावर)</div><input class="sr-input" id="cfg-gram-name" placeholder="श्री. ग्रामपंचायत">
       </div>
-      <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px;">
-        <div class="sr-label">Theme Color</div>
-        <input type="color" class="sr-input" id="cfg-color" value="#1a6b3a" style="height:44px; padding:4px 8px;">
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+        <div class="sr-label">Theme Color</div><input type="color" class="sr-input" id="cfg-color" value="#1a6b3a" style="height:44px;padding:4px 8px;">
       </div>
     </div>
 
-    <!-- Payment Settings -->
     <div class="settings-group">
-      <div class="sg-title">💰 Payment Settings</div>
-      <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px;">
-        <div class="sr-label">Default प्रति फेरी दर (₹)</div>
-        <input class="sr-input" id="cfg-default-rate" type="number" placeholder="150">
+      <div class="sg-title">🚍 Trip Settings</div>
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+        <div class="sr-label">Trip दर (₹ — एका trip ला एकच रक्कम)</div>
+        <input class="sr-input" id="cfg-trip-rate" type="number" placeholder="500">
       </div>
-      <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px;">
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+        <div class="sr-label">Trip Stages (comma ने विभागा)</div>
+        <input class="sr-input" id="cfg-stages" placeholder="सुरुवात,मध्य,शेवट">
+        <div style="font-size:11px;color:var(--text3);margin-top:4px;">उदा: सुरुवात,शेवट &nbsp;|&nbsp; लोडिंग,अनलोडिंग &nbsp;|&nbsp; Pick-up,Drop</div>
+      </div>
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
         <div class="sr-label">Geo-fence अंतर (मीटर)</div>
         <input class="sr-input" id="cfg-fence" type="number" placeholder="10">
       </div>
     </div>
 
-    <!-- Google Sheets -->
     <div class="settings-group">
-      <div class="sg-title">📊 Google Sheets / Apps Script</div>
-      <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px;">
-        <div class="sr-label">Apps Script Web App URL</div>
+      <div class="sg-title">📊 Google Sheets</div>
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+        <div class="sr-label">Apps Script URL</div>
         <input class="sr-input" id="cfg-script-url" placeholder="https://script.google.com/macros/s/.../exec">
       </div>
-      <div class="setting-row" style="padding-top:10px; padding-bottom:10px;">
-        <div class="sr-left"><div class="sr-label">Auto Sync चालू</div><div class="sr-sub">फोटो काढल्यावर लगेच sync</div></div>
+      <div class="setting-row" style="padding-top:10px;padding-bottom:10px;">
+        <div class="sr-left"><div class="sr-label">Auto Sync</div><div class="sr-sub">Trip complete झाल्यावर लगेच sync</div></div>
         <button class="toggle" id="tog-autosync" onclick="toggleSetting('autosync')"></button>
       </div>
       <div class="setting-row" style="padding:10px 14px;">
         <div class="flex-wrap" style="width:100%;">
           <button class="btn btn-outline btn-sm" onclick="testScript()">🔌 Connection Test</button>
-          <button class="btn btn-primary btn-sm" onclick="syncAllNow()">🔄 सर्व Sync करा</button>
+          <button class="btn btn-primary btn-sm" onclick="syncAllNow()">🔄 Sync करा</button>
         </div>
       </div>
     </div>
 
-    <!-- WhatsApp -->
     <div class="settings-group">
       <div class="sg-title">📱 WhatsApp Numbers</div>
-      <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px;">
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
         <div class="sr-label">चालकाचा नंबर (91XXXXXXXXXX)</div>
         <input class="sr-input" id="cfg-drv-phone" type="tel" placeholder="919876543210">
       </div>
-      <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px;">
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
         <div class="sr-label">सरपंचाचा नंबर (91XXXXXXXXXX)</div>
         <input class="sr-input" id="cfg-srp-phone" type="tel" placeholder="919876543220">
       </div>
     </div>
 
-    <!-- Developer Credentials -->
     <div class="settings-group">
       <div class="sg-title">🔐 Developer Login बदला</div>
-      <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px;">
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
         <div class="sr-label">Developer Login ID</div>
         <input class="sr-input" id="cfg-dev-id" placeholder="dev1">
       </div>
-      <div class="setting-row" style="flex-direction:column; align-items:flex-start; gap:6px;">
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
         <div class="sr-label">Developer पासवर्ड</div>
         <input class="sr-input" id="cfg-dev-pass" type="password" placeholder="नवीन पासवर्ड">
       </div>
     </div>
 
     <button class="btn btn-primary btn-full" onclick="saveAllSettings()" style="margin-bottom:8px;">💾 सर्व Settings सेव्ह करा</button>
-    <button class="btn btn-outline btn-full" onclick="exportSettings()">📤 Settings Export करा</button>
-    <div class="info-box mt-12">
-      💡 Settings सेव्ह केल्यावर सर्व devices वर आपोआप लागू होतात जेव्हा Google Sheets Script URL जोडलेली असेल.
-    </div>
+    <button class="btn btn-outline btn-full" onclick="exportSettings()">📤 Settings Export</button>
   </div>
 
   <!-- USERS TAB -->
@@ -573,9 +595,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         <div class="field"><label>Latitude</label><input class="form-input" id="loc-lat" type="number" step="0.0001" placeholder="17.6805"></div>
         <div class="field"><label>Longitude</label><input class="form-input" id="loc-lng" type="number" step="0.0001" placeholder="74.0183"></div>
       </div>
-      <div class="field"><label>प्रति फेरी दर (₹)</label><input class="form-input" id="loc-rate" type="number" placeholder="150"></div>
       <button class="btn btn-primary btn-full" onclick="addStop()">➕ थांबा जोडा</button>
-      <div class="info-box mt-12">💡 <strong>GPS Coordinates:</strong> Google Maps → त्या ठिकाणी लांब दाबा → Latitude, Longitude दिसेल</div>
+      <div class="info-box mt-12">💡 Google Maps → त्या ठिकाणी लांब दाबा → Lat, Lng copy करा</div>
     </div>
     <div class="section-label">थांब्यांची यादी</div>
     <div id="dev-stops-list"></div>
@@ -586,13 +607,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     <div class="stat-grid" id="dev-data-stats"></div>
     <div class="section-label">Recent Trips</div>
     <div id="dev-trips-preview"></div>
-    <div class="section-label">Data Actions</div>
+    <div class="section-label">Actions</div>
     <div style="display:flex;flex-direction:column;gap:9px;">
-      <button class="btn btn-outline btn-full" onclick="exportJSON()">📤 JSON Export करा</button>
-      <button class="btn btn-outline btn-full" onclick="syncAllNow()">🔄 सर्व Pending Sync करा</button>
-      <button class="btn btn-red btn-full" onclick="clearTrips()">🗑️ सर्व Trips Clear करा</button>
+      <button class="btn btn-outline btn-full" onclick="exportJSON()">📤 JSON Export</button>
+      <button class="btn btn-outline btn-full" onclick="syncAllNow()">🔄 सर्व Sync करा</button>
+      <button class="btn btn-red btn-full" onclick="clearAllData()">🗑️ सर्व Data Clear करा</button>
     </div>
-    <div class="warn-box mt-12">⚠️ "Clear" केल्यावर सर्व trips, photos delete होतील. हे पूर्ववत होणार नाही!</div>
+    <div class="warn-box mt-12">⚠️ Clear केल्यावर सर्व trips, photos delete होतील!</div>
   </div>
 
   <nav class="bottom-nav" id="dev-nav">
@@ -623,16 +644,38 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   </div>
 </div>
 
+<!-- PAYMENT MODAL -->
+<div class="modal-bg" id="modal-payment">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-payment')">✕</button>
+    <div class="modal-title">💳 Payment नोंद करा</div>
+    <div id="modal-pay-trip-info" style="background:var(--primary-light);border-radius:8px;padding:10px 12px;margin-bottom:14px;font-size:13px;"></div>
+    <div class="field"><label>Payment दिनांक</label><input class="form-input" id="pay-date" type="date"></div>
+    <div class="field">
+      <label>Payment Mode</label>
+      <select class="form-input" id="pay-mode">
+        <option value="रोख">💵 रोख (Cash)</option>
+        <option value="UPI">📱 UPI</option>
+        <option value="Bank Transfer">🏦 Bank Transfer</option>
+        <option value="Cheque">📝 Cheque</option>
+      </select>
+    </div>
+    <div class="field"><label>UTR / Reference नंबर (optional)</label><input class="form-input" id="pay-utr" placeholder="UTR नंबर"></div>
+    <div class="field"><label>रक्कम (₹)</label><input class="form-input" id="pay-amount" type="number" placeholder="500"></div>
+    <button class="btn btn-primary btn-full mt-8" onclick="savePayment()">✅ Payment नोंद करा</button>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
 // ================================================================
-// DATABASE — localStorage with Google Sheets sync
+// DATABASE
 // ================================================================
 const DB = {
-  get:(k)=>{ try{return JSON.parse(localStorage.getItem('gg2_'+k)||'null')}catch{return null} },
-  set:(k,v)=>{ localStorage.setItem('gg2_'+k,JSON.stringify(v)) },
+  get:(k)=>{ try{return JSON.parse(localStorage.getItem('gg3_'+k)||'null')}catch{return null} },
+  set:(k,v)=>{ localStorage.setItem('gg3_'+k,JSON.stringify(v)) },
   push:(k,item)=>{ const a=DB.get(k)||[]; a.push(item); DB.set(k,a); return a; }
 };
 
@@ -645,7 +688,8 @@ const DEF_SETTINGS = {
   logo: '🚌',
   gramName: 'ग्रामपंचायत',
   color: '#1a6b3a',
-  defaultRate: 150,
+  tripRate: 500,
+  stages: 'सुरुवात,शेवट',
   fenceMeters: 10,
   scriptUrl: 'https://script.google.com/macros/s/AKfycbwTu9x5OkDeXcv1PfVv69TZYJVD2HhggDJhk-f1tUgaGA6KcrWkp2r5yGlMjeDtrbhDjA/exec',
   sheetUrl: 'https://docs.google.com/spreadsheets/d/1fPTBp_4H3F5nUHuCNsAXOL3wHt0MtHASLtPzFg-6GZY/edit',
@@ -658,28 +702,42 @@ const DEF_SETTINGS = {
 
 const DEF_USERS = [
   { id:'driver1', pass:'pass123', role:'user', name:'रामराव शिंदे', phone:'9876543210' },
-  { id:'admin1', pass:'admin123', role:'admin', name:'ग्रामसेवक जाधव', phone:'9876543220' }
+  { id:'admin1',  pass:'admin123', role:'admin', name:'ग्रामसेवक जाधव', phone:'9876543220' }
 ];
 
 const DEF_STOPS = [
-  { id:1, name:'ग्रामपंचायत कार्यालय', lat:17.6805, lng:74.0183, rate:150 },
-  { id:2, name:'मुख्य बाजारपेठ', lat:17.6820, lng:74.0200, rate:120 },
-  { id:3, name:'प्राथमिक शाळा', lat:17.6790, lng:74.0165, rate:100 },
-  { id:4, name:'आरोग्य केंद्र', lat:17.6835, lng:74.0210, rate:130 },
-  { id:5, name:'रेल्वे स्थानक', lat:17.6770, lng:74.0150, rate:200 }
+  { id:1, name:'ग्रामपंचायत कार्यालय', lat:17.6805, lng:74.0183 },
+  { id:2, name:'मुख्य बाजारपेठ',        lat:17.6820, lng:74.0200 },
+  { id:3, name:'प्राथमिक शाळा',         lat:17.6790, lng:74.0165 },
+  { id:4, name:'आरोग्य केंद्र',          lat:17.6835, lng:74.0210 },
+  { id:5, name:'रेल्वे स्थानक',          lat:17.6770, lng:74.0150 }
 ];
+
+const MONTHS = ['जानेवारी','फेब्रुवारी','मार्च','एप्रिल','मे','जून','जुलै','ऑगस्ट','सप्टेंबर','ऑक्टोबर','नोव्हेंबर','डिसेंबर'];
+
+// ================================================================
+// STATE
+// ================================================================
+let currentUser = null;
+let gpsWatchId = null;
+let camStream = null;
+let capturedPhoto = null;
+let currentGPS = null;
+let activeTrip = null;  // { id, driverId, driverName, fromStop, toStop, stages[], stagePhotos{}, status, date, amount, ... }
+let currentPayTripId = null;
 
 // ================================================================
 // INIT
 // ================================================================
 function initApp() {
-  // जुन्या trips वाचवा
+  // Always fresh reset settings/users/stops — keep trips & activeTrip
   const oldTrips = DB.get('trips') || [];
-  // Settings, users, stops नेहमी fresh reset करा — जुना corrupt data जाईल
+  const oldActiveTrip = DB.get('activeTrip') || null;
   DB.set('settings', { ...DEF_SETTINGS });
   DB.set('users', [...DEF_USERS]);
   DB.set('stops', [...DEF_STOPS]);
   DB.set('trips', oldTrips);
+  DB.set('activeTrip', oldActiveTrip);
   applySettings();
   checkDevHint();
   updateSyncBadge();
@@ -691,106 +749,72 @@ function getSettings() {
 
 function applySettings() {
   const s = getSettings();
-  // Theme color
   document.documentElement.style.setProperty('--primary', s.color);
   document.documentElement.style.setProperty('--primary-mid', s.color);
-  // Derive light version
   document.documentElement.style.setProperty('--primary-dark', darkenColor(s.color, 0.5));
   document.documentElement.style.setProperty('--primary-light', lightenColor(s.color));
-  // Meta
   document.getElementById('app-title').textContent = s.appName;
   document.getElementById('theme-color-meta').setAttribute('content', s.color);
-  // Login screen
   document.getElementById('login-logo-icon').textContent = s.logo;
   document.getElementById('login-app-name').textContent = s.appName;
   document.getElementById('login-app-tagline').textContent = s.tagline;
-  // Topbars
   setTxt('drv-app-name', s.appName);
   setTxt('drv-logo', s.logo);
   setTxt('adm-app-name', s.appName);
   setTxt('adm-logo', '🛡️');
   setTxt('dev-app-name', s.appName + ' — Dev');
-  // Fence label
-  setTxt('fence-dist-lbl', s.fenceMeters);
-  // Bill gram name
-  setTxt('bill-gram-name', s.gramName);
+  const fl = document.getElementById('fence-dist-lbl');
+  if (fl) fl.textContent = s.fenceMeters;
 }
 
-function darkenColor(hex, factor) {
-  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
-  return `rgb(${Math.round(r*factor)},${Math.round(g*factor)},${Math.round(b*factor)})`;
+function darkenColor(hex, f) {
+  try { const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16); return `rgb(${Math.round(r*f)},${Math.round(g*f)},${Math.round(b*f)})`; } catch(e){return '#0d3d1f';}
 }
 function lightenColor(hex) {
-  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
-  return `rgba(${r},${g},${b},0.12)`;
+  try { const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16); return `rgba(${r},${g},${b},0.12)`; } catch(e){return '#e8f5ee';}
 }
 
 function checkDevHint() {
   const s = getSettings();
   const hint = document.getElementById('dev-hint');
-  // Users DB मध्ये नसल्यासच hint दाखवा
-  const users = DB.get('users') || [];
-  if (users.length === 0) {
-    hint.style.display = 'block';
-    document.getElementById('hint-id').textContent = s.devId || DEF_SETTINGS.devId;
-    document.getElementById('hint-pass').textContent = s.devPass || DEF_SETTINGS.devPass;
-  } else {
-    hint.style.display = 'none';
-  }
+  hint.style.display = 'block';
+  document.getElementById('hint-id').textContent = s.devId || 'dev1';
+  document.getElementById('hint-pass').textContent = s.devPass || 'dev@2024';
 }
 
-function setTxt(id, val) { const el = document.getElementById(id); if(el) el.textContent = val; }
+function setTxt(id, val) { const el=document.getElementById(id); if(el) el.textContent=val; }
 
 // ================================================================
 // LOGIN
 // ================================================================
-let currentUser = null;
-let gpsWatchId = null;
-let camStream = null;
-let capturedPhoto = null;
-let selectedStop = null;
-let currentGPS = null;
-
 function doLogin() {
   const uid = document.getElementById('inp-uid').value.trim();
   const pass = document.getElementById('inp-pass').value;
   const err = document.getElementById('login-err');
   err.style.display = 'none';
-
-  if (!uid || !pass) { err.style.display = 'block'; err.textContent = '⚠️ ID आणि पासवर्ड दोन्ही टाका'; return; }
-
+  if (!uid || !pass) { err.textContent='⚠️ ID आणि पासवर्ड दोन्ही टाका'; err.style.display='block'; return; }
   const s = getSettings();
-  // Check developer
   const devId = s.devId || DEF_SETTINGS.devId;
   const devPass = s.devPass || DEF_SETTINGS.devPass;
   if (uid === devId && pass === devPass) {
-    currentUser = { id: uid, role: 'developer', name: 'Developer' };
-    showScreen('developer');
-    initDevScreen();
-    return;
+    currentUser = { id:uid, role:'developer', name:'Developer' };
+    showScreen('developer'); initDevScreen(); return;
   }
-  // Check other users — DB मध्ये नसल्यास DEF_USERS वापर
   const users = DB.get('users') || DEF_USERS;
   const user = users.find(u => u.id === uid && u.pass === pass);
-  if (!user) { err.style.display = 'block'; err.textContent = '❌ चुकीचा ID किंवा पासवर्ड'; return; }
+  if (!user) { err.textContent='❌ चुकीचा ID किंवा पासवर्ड'; err.style.display='block'; return; }
   currentUser = user;
-  if (user.role === 'user') {
-    showScreen('driver');
-    initDrvScreen();
-    startGPS();
-  } else if (user.role === 'admin') {
-    showScreen('admin');
-    initAdmScreen();
-  }
+  if (user.role === 'user') { showScreen('driver'); initDrvScreen(); startGPS(); }
+  else if (user.role === 'admin') { showScreen('admin'); initAdmScreen(); }
 }
 
 function logout() {
   if (gpsWatchId) navigator.geolocation.clearWatch(gpsWatchId);
   if (camStream) { camStream.getTracks().forEach(t=>t.stop()); camStream=null; }
-  currentUser = null; capturedPhoto = null; selectedStop = null; currentGPS = null;
+  currentUser=null; capturedPhoto=null; currentGPS=null; activeTrip=null; currentPayTripId=null;
   showScreen('login');
-  document.getElementById('inp-uid').value = '';
-  document.getElementById('inp-pass').value = '';
+  document.getElementById('inp-uid').value='';
+  document.getElementById('inp-pass').value='';
   checkDevHint();
 }
 
@@ -806,63 +830,85 @@ function startGPS() {
   if (!navigator.geolocation) return;
   gpsWatchId = navigator.geolocation.watchPosition(
     pos => {
-      currentGPS = { lat: pos.coords.latitude, lng: pos.coords.longitude, acc: pos.coords.accuracy };
+      currentGPS = { lat:pos.coords.latitude, lng:pos.coords.longitude, acc:pos.coords.accuracy };
       const el = document.getElementById('drv-gps-txt');
-      if (el) el.textContent = `GPS: ±${Math.round(currentGPS.acc)}m — ${currentGPS.lat.toFixed(4)}, ${currentGPS.lng.toFixed(4)}`;
-      if (selectedStop) checkFence();
+      if (el) el.textContent = `GPS: ±${Math.round(currentGPS.acc)}m`;
+      if (activeTrip) checkTripFence();
     },
-    err => {
-      const el = document.getElementById('drv-gps-txt');
-      if (el) el.textContent = 'GPS उपलब्ध नाही';
-    },
-    { enableHighAccuracy: true, timeout: 15000, maximumAge: 5000 }
+    () => { const el=document.getElementById('drv-gps-txt'); if(el) el.textContent='GPS उपलब्ध नाही'; },
+    { enableHighAccuracy:true, timeout:15000, maximumAge:5000 }
   );
 }
 
 function getDistance(lat1,lng1,lat2,lng2) {
-  const R=6371000, dLat=(lat2-lat1)*Math.PI/180, dLng=(lng2-lng1)*Math.PI/180;
+  const R=6371000,dLat=(lat2-lat1)*Math.PI/180,dLng=(lng2-lng1)*Math.PI/180;
   const a=Math.sin(dLat/2)**2+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
   return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
 }
 
-function checkFence() {
-  if (!selectedStop) return;
-  const box = document.getElementById('geo-box');
-  const icon = document.getElementById('geo-icon');
-  const txt = document.getElementById('geo-txt');
+function getStopById(id) {
+  return (DB.get('stops')||DEF_STOPS).find(s=>s.id==id) || null;
+}
+
+function getCurrentStageStop() {
+  if (!activeTrip) return null;
+  const s = getSettings();
+  const stages = s.stages.split(',').map(x=>x.trim());
+  const idx = activeTrip.completedStages.length;
+  if (idx >= stages.length) return null;
+  // Alternate: first stage → fromStop, last stage → toStop
+  if (stages.length === 1) return getStopById(activeTrip.toStopId);
+  if (idx === 0) return getStopById(activeTrip.fromStopId);
+  if (idx === stages.length - 1) return getStopById(activeTrip.toStopId);
+  // Middle stages → allow anywhere (no fence or use from stop)
+  return getStopById(activeTrip.fromStopId);
+}
+
+function checkTripFence() {
+  const box = document.getElementById('trip-geo-box');
+  if (!box || !activeTrip) return;
+  const stop = getCurrentStageStop();
+  if (!stop) return;
   const s = getSettings();
   const fence = s.fenceMeters || 10;
   box.style.display = 'flex';
-
   if (!currentGPS) {
-    box.className='geo-status geo-warn'; icon.textContent='⏳'; txt.textContent='GPS location मिळत नाही, थांबा...';
+    box.className='geo-status geo-warn';
+    document.getElementById('trip-geo-icon').textContent='⏳';
+    document.getElementById('trip-geo-txt').textContent='GPS मिळत नाही...';
     return;
   }
-  const dist = getDistance(currentGPS.lat, currentGPS.lng, selectedStop.lat, selectedStop.lng);
+  const dist = getDistance(currentGPS.lat, currentGPS.lng, stop.lat, stop.lng);
   if (dist <= fence) {
-    box.className='geo-status geo-ok'; icon.textContent='✅';
-    txt.textContent=`${selectedStop.name} — ${Math.round(dist)}m — फोटो काढता येईल!`;
+    box.className='geo-status geo-ok';
+    document.getElementById('trip-geo-icon').textContent='✅';
+    document.getElementById('trip-geo-txt').textContent=`${stop.name} — ${Math.round(dist)}m — फोटो काढता येईल!`;
   } else {
-    box.className='geo-status geo-error'; icon.textContent='❌';
-    txt.textContent=`तुम्ही ${Math.round(dist)}m दूर आहात. ${fence}m च्या आत यावे.`;
+    box.className='geo-status geo-error';
+    document.getElementById('trip-geo-icon').textContent='❌';
+    document.getElementById('trip-geo-txt').textContent=`${stop.name} पासून ${Math.round(dist)}m दूर. ${fence}m च्या आत या.`;
   }
 }
 
-function isInFence() {
-  if (!selectedStop || !currentGPS) return false;
+function isInTripFence() {
+  if (!activeTrip || !currentGPS) return false;
+  const stop = getCurrentStageStop();
+  if (!stop) return false;
   const s = getSettings();
-  const fence = s.fenceMeters || 10;
-  return getDistance(currentGPS.lat, currentGPS.lng, selectedStop.lat, selectedStop.lng) <= fence;
+  return getDistance(currentGPS.lat, currentGPS.lng, stop.lat, stop.lng) <= (s.fenceMeters||10);
 }
 
 // ================================================================
 // DRIVER SCREEN
 // ================================================================
-const MONTHS = ['जानेवारी','फेब्रुवारी','मार्च','एप्रिल','मे','जून','जुलै','ऑगस्ट','सप्टेंबर','ऑक्टोबर','नोव्हेंबर','डिसेंबर'];
-
 function initDrvScreen() {
   setTxt('drv-user-name', currentUser.name);
-  populateStops();
+  // Restore active trip if any
+  const saved = DB.get('activeTrip');
+  if (saved && saved.driverId === currentUser.id && saved.status === 'active') {
+    activeTrip = saved;
+  }
+  populateTripStops();
   refreshDrvHome();
 }
 
@@ -870,72 +916,132 @@ function showDrvTab(tab) {
   document.querySelectorAll('#screen-driver .tab-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('drv-'+tab).classList.add('active');
   document.querySelectorAll('#drv-nav .nav-item').forEach((b,i)=>{
-    b.classList.toggle('active',['home','camera','payments'][i]===tab);
+    b.classList.toggle('active',['home','trip','payments'][i]===tab);
   });
-  if (tab==='payments') refreshDrvPayments();
   if (tab==='home') refreshDrvHome();
+  if (tab==='trip') refreshTripUI();
+  if (tab==='payments') refreshDrvPayments();
 }
 
-function populateStops() {
-  const sel = document.getElementById('stop-sel');
-  if (!sel) return;
+function populateTripStops() {
   const stops = DB.get('stops') || DEF_STOPS;
-  sel.innerHTML = '<option value="">— थांबा निवडा —</option>' +
-    stops.map(s=>`<option value="${s.id}">${s.name} (₹${s.rate}/फेरी)</option>`).join('');
+  const opts = '<option value="">— थांबा निवडा —</option>' + stops.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
+  const f = document.getElementById('trip-from');
+  const t = document.getElementById('trip-to');
+  if (f) f.innerHTML = opts;
+  if (t) t.innerHTML = opts;
+  // Check for duplicate when from/to changes
+  if (f) f.addEventListener('change', checkDuplicate);
+  if (t) t.addEventListener('change', checkDuplicate);
 }
 
-function onStopChange() {
-  const sel = document.getElementById('stop-sel');
-  const stops = DB.get('stops') || DEF_STOPS;
-  selectedStop = stops.find(s=>s.id==sel.value) || null;
-  if (selectedStop) checkFence(); else document.getElementById('geo-box').style.display='none';
-}
-
-function refreshDrvHome() {
+function checkDuplicate() {
+  const from = document.getElementById('trip-from').value;
+  const to = document.getElementById('trip-to').value;
+  if (!from || !to || from === to) { document.getElementById('trip-dup-warn').style.display='none'; return; }
+  const today = new Date().toLocaleDateString('mr-IN');
   const trips = DB.get('trips') || [];
-  const now = new Date();
-  const today = now.toLocaleDateString('mr-IN');
-  const todayT = trips.filter(t=>t.driverId===currentUser.id && t.date===today);
-  const monthT = trips.filter(t=>t.driverId===currentUser.id && t.month===now.getMonth() && t.year===now.getFullYear());
-
-  setTxt('drv-today-trips', todayT.length);
-  setTxt('drv-today-amt', '₹'+todayT.reduce((s,t)=>s+t.amount,0));
-  setTxt('drv-month-total', '₹'+monthT.reduce((s,t)=>s+t.amount,0));
-  setTxt('drv-month-lbl', MONTHS[now.getMonth()]+' '+now.getFullYear()+' — '+monthT.length+' फेऱ्या');
-
-  const grid = document.getElementById('drv-today-photos');
-  if (todayT.length===0) {
-    grid.innerHTML='<div class="empty"><div class="empty-icon">📷</div><div class="empty-text">अजून फोटो नाही</div></div>';
-  } else {
-    grid.innerHTML='<div class="photo-grid">'+todayT.slice(-6).map(t=>`
-      <div class="photo-card"><img src="${t.photo}" loading="lazy">
-      <div class="photo-card-info"><div class="pci-stop">${t.stopName}</div><div class="pci-time">${t.time}</div></div></div>`).join('')+'</div>';
-  }
+  const dup = trips.find(t=>t.driverId===currentUser.id && t.date===today && t.fromStopId==from && t.toStopId==to && t.status==='complete');
+  document.getElementById('trip-dup-warn').style.display = dup ? 'block' : 'none';
 }
 
-function refreshDrvPayments() {
-  const trips = (DB.get('trips')||[]).filter(t=>t.driverId===currentUser.id).reverse();
-  const el = document.getElementById('drv-pay-list');
-  if (trips.length===0) { el.innerHTML='<div class="empty"><div class="empty-icon">💰</div><div class="empty-text">अजून पेमेंट नाही</div></div>'; return; }
-  const total = trips.reduce((s,t)=>s+t.amount,0);
-  el.innerHTML=`
-    <div class="pay-summary"><div class="ps-label">एकूण देय</div><div class="ps-amount">₹${total}</div><div class="ps-sub">${trips.length} फेऱ्या</div></div>
-    <div class="card">${trips.map(t=>`
-      <div class="pay-row">
-        <div><div class="li-date">${t.date} — ${t.time}</div><div class="li-title">📍 ${t.stopName}</div></div>
-        <div class="li-amount">₹${t.amount}</div>
-      </div>`).join('')}</div>`;
+function startTrip() {
+  const fromId = document.getElementById('trip-from').value;
+  const toId   = document.getElementById('trip-to').value;
+  if (!fromId || !toId) { showToast('⚠️ From आणि To दोन्ही थांबे निवडा'); return; }
+  if (fromId === toId) { showToast('⚠️ From आणि To वेगळे असावेत'); return; }
+  if (activeTrip) { showToast('⚠️ आधी चालू trip पूर्ण करा'); return; }
+
+  const stops = DB.get('stops') || DEF_STOPS;
+  const fromStop = stops.find(s=>s.id==fromId);
+  const toStop   = stops.find(s=>s.id==toId);
+  const s = getSettings();
+  const today = new Date().toLocaleDateString('mr-IN');
+
+  // Duplicate check
+  const trips = DB.get('trips') || [];
+  const dup = trips.find(t=>t.driverId===currentUser.id && t.date===today && t.fromStopId==fromId && t.toStopId==toId && (t.status==='complete'||t.status==='paid'));
+  if (dup) { showToast('⚠️ हा route आज आधीच पूर्ण झाला आहे!'); return; }
+
+  const stages = s.stages.split(',').map(x=>x.trim()).filter(Boolean);
+  activeTrip = {
+    id: Date.now(),
+    driverId: currentUser.id,
+    driverName: currentUser.name,
+    fromStopId: fromId,
+    toStopId: toId,
+    fromName: fromStop.name,
+    toName: toStop.name,
+    stages: stages,
+    completedStages: [],
+    stagePhotos: {},
+    stageGPS: {},
+    status: 'active',
+    date: today,
+    month: new Date().getMonth(),
+    year: new Date().getFullYear(),
+    amount: s.tripRate || 500,
+    synced: false
+  };
+  DB.set('activeTrip', activeTrip);
+  showToast(`🚀 Trip सुरू झाली! ${fromStop.name} → ${toStop.name}`);
+  refreshTripUI();
+  refreshDrvHome();
+}
+
+function refreshTripUI() {
+  const selectUI = document.getElementById('trip-select-ui');
+  const activeUI = document.getElementById('trip-active-ui');
+  if (!activeTrip || activeTrip.status !== 'active') {
+    selectUI.style.display = 'block';
+    activeUI.style.display = 'none';
+    capturedPhoto = null;
+    return;
+  }
+  selectUI.style.display = 'none';
+  activeUI.style.display = 'block';
+  // Route label
+  setTxt('active-route-label', `${activeTrip.fromName} → ${activeTrip.toName}`);
+  const currentStageIdx = activeTrip.completedStages.length;
+  const currentStageName = activeTrip.stages[currentStageIdx] || '—';
+  setTxt('active-stage-label', `Stage ${currentStageIdx+1}/${activeTrip.stages.length}: ${currentStageName}`);
+  setTxt('cam-ph-txt', `${currentStageName} चा फोटो काढा`);
+  // Stage progress
+  const prog = document.getElementById('active-stage-progress');
+  if (prog) {
+    prog.innerHTML = activeTrip.stages.map((st,i)=>{
+      const done = i < currentStageIdx;
+      const cur = i === currentStageIdx;
+      const cls = done?'done':cur?'current':'pending';
+      const lineHtml = i<activeTrip.stages.length-1 ? `<div class="stage-line ${done?'done':''}"></div>` : '';
+      return `<div class="stage-step"><div class="stage-col"><div class="stage-dot ${cls}">${done?'✓':i+1}</div><div class="stage-label">${st}</div></div>${lineHtml}</div>`;
+    }).join('');
+  }
+  checkTripFence();
+  // Reset camera UI
+  resetCamUI();
+}
+
+function resetCamUI() {
+  capturedPhoto = null;
+  document.getElementById('cam-preview').style.display = 'none';
+  document.getElementById('cam-ph').style.display = 'flex';
+  document.getElementById('cam-video').style.display = 'none';
+  document.getElementById('btn-startcam').style.display = 'block';
+  document.getElementById('btn-capture').style.display = 'none';
+  document.getElementById('btn-retake').style.display = 'none';
+  document.getElementById('btn-savephoto').style.display = 'none';
 }
 
 // ================================================================
 // CAMERA
 // ================================================================
 async function startCam() {
+  if (!activeTrip) { showToast('⚠️ आधी trip सुरू करा'); return; }
   try {
     camStream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false});
     const v = document.getElementById('cam-video');
-    v.srcObject = camStream;
-    v.style.display='block';
+    v.srcObject = camStream; v.style.display='block';
     document.getElementById('cam-ph').style.display='none';
     document.getElementById('cam-preview').style.display='none';
     document.getElementById('btn-startcam').style.display='none';
@@ -943,25 +1049,23 @@ async function startCam() {
     document.getElementById('btn-retake').style.display='none';
     document.getElementById('btn-savephoto').style.display='none';
     showToast('📷 कॅमेरा सुरू झाला');
-  } catch(e) {
-    showToast('❌ कॅमेरा उपलब्ध नाही: '+e.message);
-  }
+  } catch(e) { showToast('❌ कॅमेरा उपलब्ध नाही: '+e.message); }
 }
 
 function capturePhoto() {
-  if (!selectedStop) { showToast('⚠️ आधी थांबा निवडा'); return; }
-  if (!isInFence()) {
-    showToast('❌ ठरलेल्या ठिकाणाच्या बाहेर आहात! फोटो काढता येणार नाही.');
-    checkFence();
+  if (!activeTrip) return;
+  if (!isInTripFence()) {
+    showToast('❌ ठरलेल्या ठिकाणाच्या बाहेर आहात! जवळ जा.');
+    checkTripFence();
     return;
   }
-  const v = document.getElementById('cam-video');
-  const c = document.getElementById('cam-canvas');
-  c.width = v.videoWidth||640; c.height = v.videoHeight||480;
+  const v=document.getElementById('cam-video');
+  const c=document.getElementById('cam-canvas');
+  c.width=v.videoWidth||640; c.height=v.videoHeight||480;
   c.getContext('2d').drawImage(v,0,0);
   capturedPhoto = c.toDataURL('image/jpeg',0.72);
-  const p = document.getElementById('cam-preview');
-  p.src = capturedPhoto; p.style.display='block';
+  const p=document.getElementById('cam-preview');
+  p.src=capturedPhoto; p.style.display='block';
   v.style.display='none';
   document.getElementById('btn-capture').style.display='none';
   document.getElementById('btn-retake').style.display='block';
@@ -970,45 +1074,117 @@ function capturePhoto() {
   showToast('📸 फोटो तयार! सेव्ह करा.');
 }
 
-function retakeCam() { capturedPhoto=null; document.getElementById('cam-preview').style.display='none'; document.getElementById('btn-savephoto').style.display='none'; startCam(); }
-
-function saveEntry() {
-  if (!capturedPhoto||!selectedStop||!currentUser) return;
-  const now = new Date();
-  const entry = {
-    id: Date.now(),
-    driverId: currentUser.id,
-    driverName: currentUser.name,
-    stopId: selectedStop.id,
-    stopName: selectedStop.name,
-    photo: capturedPhoto,
-    lat: currentGPS?.lat||selectedStop.lat,
-    lng: currentGPS?.lng||selectedStop.lng,
-    timestamp: now.toISOString(),
-    date: now.toLocaleDateString('mr-IN'),
-    time: now.toLocaleTimeString('mr-IN'),
-    amount: selectedStop.rate,
-    month: now.getMonth(),
-    year: now.getFullYear(),
-    synced: false
-  };
-  DB.push('trips', entry);
-  updateSyncBadge();
-  const s = getSettings();
-  if (s.autoSync && s.scriptUrl) syncEntry(entry);
-  showToast(`✅ नोंद झाली! ₹${selectedStop.rate} payment जोडले.`);
-  capturedPhoto=null; selectedStop=null;
-  document.getElementById('stop-sel').value='';
+function retakeCam() {
+  // Retake only if current stage not yet saved
+  if (!capturedPhoto) { showToast('⚠️ फोटो आधीच सेव्ह झाला'); return; }
+  capturedPhoto = null;
   document.getElementById('cam-preview').style.display='none';
-  document.getElementById('cam-ph').style.display='flex';
-  document.getElementById('cam-video').style.display='none';
-  document.getElementById('btn-startcam').style.display='block';
-  document.getElementById('btn-capture').style.display='none';
-  document.getElementById('btn-retake').style.display='none';
   document.getElementById('btn-savephoto').style.display='none';
-  document.getElementById('geo-box').style.display='none';
-  refreshDrvHome();
+  document.getElementById('btn-retake').style.display='none';
+  startCam();
+}
+
+function saveStagePhoto() {
+  if (!capturedPhoto || !activeTrip) return;
+  const idx = activeTrip.completedStages.length;
+  const stageName = activeTrip.stages[idx];
+  // Save photo for this stage
+  activeTrip.stagePhotos[stageName] = capturedPhoto;
+  activeTrip.stageGPS[stageName] = currentGPS ? {...currentGPS} : null;
+  activeTrip.completedStages.push(stageName);
+  capturedPhoto = null;
+
+  // All stages done?
+  if (activeTrip.completedStages.length >= activeTrip.stages.length) {
+    completeTrip();
+  } else {
+    DB.set('activeTrip', activeTrip);
+    showToast(`✅ Stage "${stageName}" सेव्ह झाला! पुढचा stage करा.`);
+    refreshTripUI();
+  }
+}
+
+function completeTrip() {
+  activeTrip.status = 'complete';
+  activeTrip.completedAt = new Date().toISOString();
+  // Save to trips
+  const trips = DB.get('trips') || [];
+  trips.push({...activeTrip});
+  DB.set('trips', trips);
+  DB.set('activeTrip', null);
+  const s = getSettings();
+  // WhatsApp message
+  const waMsg = encodeURIComponent(`🚍 *Trip Complete!*\n\n📍 ${activeTrip.fromName} → ${activeTrip.toName}\n📅 ${activeTrip.date}\n💰 ₹${activeTrip.amount}\n👤 ${activeTrip.driverName}\n\n✅ सर्व stages पूर्ण झाले.\n\n_${s.gramName||'ग्रामपंचायत'}_`);
+  const phone = s.drvPhone;
+  if (phone) window.open(`https://wa.me/${phone}?text=${waMsg}`,'_blank');
+  showToast(`🎉 Trip Complete! ₹${activeTrip.amount}`, 4000);
+  if (s.autoSync && s.scriptUrl) syncTrip(activeTrip);
+  activeTrip = null;
+  updateSyncBadge();
   showDrvTab('home');
+}
+
+function refreshDrvHome() {
+  const trips = DB.get('trips') || [];
+  const today = new Date().toLocaleDateString('mr-IN');
+  const todayTrips = trips.filter(t=>t.driverId===currentUser?.id && t.date===today);
+  setTxt('drv-today-trips', todayTrips.length);
+  const pending = trips.filter(t=>t.driverId===currentUser?.id && t.status==='complete').reduce((s,t)=>s+t.amount,0);
+  setTxt('drv-pending-pay', '₹'+pending);
+
+  // Active trip widget
+  const atEl = document.getElementById('drv-active-trip');
+  const saved = DB.get('activeTrip');
+  if (saved && saved.driverId===currentUser?.id && saved.status==='active') {
+    activeTrip = saved;
+    const done = saved.completedStages.length;
+    const total = saved.stages.length;
+    atEl.innerHTML = `<div class="trip-card">
+      <div class="trip-route">🚍 ${saved.fromName} → ${saved.toName}</div>
+      <div class="trip-meta">${saved.date} • Stage ${done}/${total} • ₹${saved.amount}</div>
+      <div class="trip-stages">${saved.stages.map((st,i)=>`<span class="stage-pill ${i<done?'stage-done':i===done?'stage-current':'stage-pending'}">${st}</span>`).join('')}</div>
+      <button class="btn btn-amber btn-full mt-8" onclick="showDrvTab('trip')">📸 पुढचा Stage काढा →</button>
+    </div>`;
+  } else {
+    activeTrip = null;
+    atEl.innerHTML = '<div class="empty"><div class="empty-icon">🚍</div><div class="empty-text">सध्या कोणतीही trip चालू नाही</div></div>';
+  }
+
+  // Today trips
+  const tdEl = document.getElementById('drv-today-list');
+  if (!todayTrips.length) {
+    tdEl.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">आज कोणतीही trip नाही</div></div>';
+  } else {
+    tdEl.innerHTML = todayTrips.reverse().map(t=>`
+      <div class="trip-card ${t.status}">
+        <div class="flex-space">
+          <div class="trip-route">${t.fromName} → ${t.toName}</div>
+          <span class="badge ${t.status==='paid'?'badge-green':t.status==='complete'?'badge-amber':'badge-blue'}">${t.status==='paid'?'💚 Paid':t.status==='complete'?'✅ Complete':'🟡 Active'}</span>
+        </div>
+        <div class="trip-meta">${t.date} • ₹${t.amount}</div>
+      </div>`).join('');
+  }
+}
+
+function refreshDrvPayments() {
+  const trips = (DB.get('trips')||[]).filter(t=>t.driverId===currentUser.id).reverse();
+  const el = document.getElementById('drv-pay-list');
+  if (!trips.length) { el.innerHTML='<div class="empty"><div class="empty-icon">💰</div><div class="empty-text">अजून कोणतीही trip नाही</div></div>'; return; }
+  const pendingAmt = trips.filter(t=>t.status==='complete').reduce((s,t)=>s+t.amount,0);
+  const paidAmt    = trips.filter(t=>t.status==='paid').reduce((s,t)=>s+t.amount,0);
+  el.innerHTML = `
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-num" style="color:var(--amber)">₹${pendingAmt}</div><div class="stat-lbl">मिळायचे</div></div>
+      <div class="stat-box"><div class="stat-num" style="color:#2ecc71">₹${paidAmt}</div><div class="stat-lbl">मिळाले</div></div>
+    </div>
+    ${trips.map(t=>`
+    <div class="trip-card ${t.status}">
+      <div class="flex-space">
+        <div class="trip-route">${t.fromName} → ${t.toName}</div>
+        <span class="badge ${t.status==='paid'?'badge-green':t.status==='complete'?'badge-amber':'badge-blue'}">${t.status==='paid'?'💚 Paid':t.status==='complete'?'⏳ येणे':'🚍 चालू'}</span>
+      </div>
+      <div class="trip-meta">${t.date} • ₹${t.amount}${t.paymentDate?' • Paid: '+t.paymentDate:''}</div>
+    </div>`).join('')}`;
 }
 
 // ================================================================
@@ -1025,54 +1201,101 @@ function showAdmTab(tab) {
   document.querySelectorAll('#screen-admin .tab-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('adm-'+tab).classList.add('active');
   document.querySelectorAll('#adm-nav .nav-item').forEach((b,i)=>{
-    b.classList.toggle('active',['dash','bill','reports'][i]===tab);
+    b.classList.toggle('active',['dash','trips-tab','bill'][i]===tab);
   });
   if(tab==='dash') refreshAdmDash();
-  if(tab==='reports') refreshAdmReports();
+  if(tab==='trips-tab') { refreshAdmTrips(); showAdmTripsTab('active'); }
+  if(tab==='bill') populateBillDrivers();
 }
 
 function refreshAdmDash() {
   const trips=DB.get('trips')||[], now=new Date();
   const mt=trips.filter(t=>t.month===now.getMonth()&&t.year===now.getFullYear());
   setTxt('adm-trips', mt.length);
-  setTxt('adm-total', '₹'+mt.reduce((s,t)=>s+t.amount,0));
-
+  setTxt('adm-total', '₹'+mt.filter(t=>t.status!=='paid').reduce((s,t)=>s+t.amount,0)+' येणे');
   const users=(DB.get('users')||DEF_USERS).filter(u=>u.role==='user');
   const dEl=document.getElementById('adm-drivers');
-  if(!users.length) { dEl.innerHTML='<div class="empty"><div class="empty-icon">👤</div><div class="empty-text">चालक नाहीत</div></div>'; }
-  else dEl.innerHTML=users.map(u=>{
+  if(!users.length){ dEl.innerHTML='<div class="empty"><div class="empty-icon">👤</div><div class="empty-text">चालक नाहीत</div></div>'; return; }
+  dEl.innerHTML=users.map(u=>{
     const ut=mt.filter(t=>t.driverId===u.id);
+    const pending=ut.filter(t=>t.status==='complete').reduce((s,t)=>s+t.amount,0);
     return `<div class="driver-card">
       <div class="d-avatar">${u.name.charAt(0)}</div>
-      <div class="d-info"><div class="d-name">${u.name}</div><div class="d-sub">${ut.length} फेऱ्या • ${u.id}</div></div>
-      <div class="d-right"><div class="d-amount">₹${ut.reduce((s,t)=>s+t.amount,0)}</div><div class="d-albl">या महिन्यात</div></div>
+      <div class="d-info"><div class="d-name">${u.name}</div><div class="d-sub">${ut.length} trips • ${u.id}</div></div>
+      <div class="d-right"><div class="d-amount" style="color:var(--amber)">₹${pending}</div><div class="d-albl">येणे</div></div>
     </div>`;
   }).join('');
-
-  const today=now.toLocaleDateString('mr-IN');
-  const todayAll=trips.filter(t=>t.date===today);
-  const pEl=document.getElementById('adm-photos');
-  if(!todayAll.length) { pEl.innerHTML='<div class="empty"><div class="empty-icon">📷</div><div class="empty-text">आज फोटो नाहीत</div></div>'; }
-  else pEl.innerHTML='<div class="photo-grid">'+todayAll.slice(-8).map(t=>`
-    <div class="photo-card"><img src="${t.photo}" loading="lazy">
-    <div class="photo-card-info"><div class="pci-stop">${t.driverName}</div><div class="pci-time">${t.stopName}</div></div></div>`).join('')+'</div>';
 }
 
-function refreshAdmReports() {
+function showAdmTripsTab(tab) {
+  ['active','complete','paid'].forEach(t=>{
+    const el=document.getElementById('adm-trips-'+t);
+    if(el) el.style.display = t===tab?'block':'none';
+  });
+  document.querySelectorAll('#adm-trips-tab .tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active',['active','complete','paid'][i]===tab);
+  });
+}
+
+function refreshAdmTrips() {
   const trips=(DB.get('trips')||[]).reverse();
-  const el=document.getElementById('adm-all-logs');
-  if(!trips.length){ el.innerHTML='<div class="empty"><div class="empty-icon">📊</div><div class="empty-text">Records नाहीत</div></div>'; return; }
-  el.innerHTML=trips.map(t=>`
-    <div class="list-item">
-      <div class="li-header">
-        <div><div class="li-title">👤 ${t.driverName}</div><div class="li-sub">📍 ${t.stopName} • ${t.date} ${t.time}</div></div>
-        <div><div class="li-amount">₹${t.amount}</div><span class="badge ${t.synced?'badge-green':'badge-amber'}">${t.synced?'✅ Synced':'⏳ Pending'}</span></div>
-      </div>
-      ${t.photo?`<img src="${t.photo}" style="width:100%;border-radius:8px;margin-top:8px;max-height:140px;object-fit:cover;" loading="lazy">`:''}
-      <div style="font-size:10px;color:var(--text3);margin-top:4px;font-family:monospace;">📍 ${t.lat?.toFixed(5)||'—'}, ${t.lng?.toFixed(5)||'—'}</div>
-    </div>`).join('');
+  ['active','complete','paid'].forEach(status=>{
+    const el=document.getElementById('adm-trips-'+status);
+    if(!el) return;
+    const filtered=trips.filter(t=>t.status===status);
+    if(!filtered.length){ el.innerHTML=`<div class="empty"><div class="empty-icon">${status==='paid'?'💚':status==='complete'?'✅':'🚍'}</div><div class="empty-text">कोणतीही ${status} trip नाही</div></div>`; return; }
+    el.innerHTML=filtered.map(t=>`
+      <div class="trip-card ${t.status}">
+        <div class="flex-space">
+          <div>
+            <div class="trip-route">${t.fromName} → ${t.toName}</div>
+            <div class="trip-meta">👤 ${t.driverName} • ${t.date}</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:17px;font-weight:800;color:var(--primary)">₹${t.amount}</div>
+            <span class="badge ${t.status==='paid'?'badge-green':t.status==='complete'?'badge-amber':'badge-blue'}">${t.status==='paid'?'💚 Paid':t.status==='complete'?'✅ Complete':'🚍 Active'}</span>
+          </div>
+        </div>
+        ${t.status==='paid'?`<div style="font-size:11px;color:var(--text3);margin-top:6px;">💳 ${t.paymentMode||'—'} • ${t.paymentDate||'—'}${t.paymentUTR?' • UTR: '+t.paymentUTR:''}</div>`:''}
+        ${t.status==='complete'?`<button class="btn btn-primary btn-full mt-8" onclick="openPaymentModal('${t.id}')">💳 Payment नोंद करा</button>`:''}
+      </div>`).join('');
+  });
 }
 
+function openPaymentModal(tripId) {
+  const trips = DB.get('trips')||[];
+  const trip = trips.find(t=>t.id==tripId);
+  if(!trip) return;
+  currentPayTripId = tripId;
+  document.getElementById('modal-pay-trip-info').innerHTML =
+    `<strong>${trip.fromName} → ${trip.toName}</strong><br>👤 ${trip.driverName} • ${trip.date} • <strong>₹${trip.amount}</strong>`;
+  document.getElementById('pay-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('pay-amount').value = trip.amount;
+  document.getElementById('pay-utr').value = '';
+  document.getElementById('modal-payment').classList.add('show');
+}
+
+function savePayment() {
+  if(!currentPayTripId) return;
+  const trips = DB.get('trips')||[];
+  const idx = trips.findIndex(t=>t.id==currentPayTripId);
+  if(idx===-1) return;
+  trips[idx].status = 'paid';
+  trips[idx].paymentDate = document.getElementById('pay-date').value;
+  trips[idx].paymentMode = document.getElementById('pay-mode').value;
+  trips[idx].paymentUTR  = document.getElementById('pay-utr').value.trim();
+  trips[idx].paymentAmount = parseInt(document.getElementById('pay-amount').value)||trips[idx].amount;
+  DB.set('trips', trips);
+  closeModal('modal-payment');
+  showToast('✅ Payment नोंद झाली!');
+  refreshAdmTrips();
+  refreshAdmDash();
+  if (getSettings().autoSync) syncTrip(trips[idx]);
+}
+
+// ================================================================
+// BILL
+// ================================================================
 function populateBillDrivers() {
   const users=(DB.get('users')||DEF_USERS).filter(u=>u.role==='user');
   const el=document.getElementById('bill-driver');
@@ -1084,16 +1307,18 @@ function makeBill() {
   const did=document.getElementById('bill-driver').value;
   const year=new Date().getFullYear();
   const s=getSettings();
-  const trips=(DB.get('trips')||[]).filter(t=>t.month===month&&t.year===year&&(did==='all'||t.driverId===did));
+  const trips=(DB.get('trips')||[]).filter(t=>t.month===month&&t.year===year&&(did==='all'||t.driverId===did)&&t.status!=='active');
   const users=DB.get('users')||DEF_USERS;
   const dName=did==='all'?'सर्व चालक':(users.find(u=>u.id===did)?.name||did);
   setTxt('bill-period','महिना: '+MONTHS[month]+' '+year);
   setTxt('bill-drv-name','चालक: '+dName);
   setTxt('bill-gram-name',s.gramName||'ग्रामपंचायत');
-  const grouped={};
-  trips.forEach(t=>{ if(!grouped[t.date])grouped[t.date]={stops:[],total:0,count:0}; grouped[t.date].stops.push(t.stopName); grouped[t.date].total+=t.amount; grouped[t.date].count++; });
   let grand=0;
-  document.getElementById('bill-body').innerHTML=Object.entries(grouped).map(([d,g])=>{ grand+=g.total; return `<tr><td>${d}</td><td>${g.stops.slice(0,2).join(', ')}${g.stops.length>2?'…':''}</td><td style="text-align:center">${g.count}</td><td style="font-weight:700;color:var(--primary)">₹${g.total}</td></tr>`; }).join('')||'<tr><td colspan="4" style="text-align:center;color:var(--text3)">फेऱ्या नाहीत</td></tr>';
+  document.getElementById('bill-body').innerHTML=trips.map(t=>{
+    grand+=t.amount;
+    const payStatus=t.status==='paid'?`<span class="badge badge-green">💚 Paid</span>`:`<span class="badge badge-amber">⏳ येणे</span>`;
+    return `<tr><td>${t.date}</td><td>${t.fromName}→${t.toName}</td><td>${payStatus}</td><td style="font-weight:700;color:var(--primary)">₹${t.amount}</td></tr>`;
+  }).join('')||'<tr><td colspan="4" style="text-align:center;color:var(--text3)">Trips नाहीत</td></tr>';
   document.getElementById('bill-grand').innerHTML=`<strong>₹${grand}</strong>`;
   document.getElementById('bill-area').style.display='block';
   showToast('📋 बिल तयार झाले!');
@@ -1116,7 +1341,6 @@ ${document.getElementById('bill-content').querySelector('table').outerHTML}
 <p style="text-align:center;font-size:11px;color:#999;margin-top:20px">Generated by ${s.appName} • ${new Date().toLocaleString('mr-IN')}</p>
 </body></html>`);
   w.document.close(); setTimeout(()=>w.print(),500);
-  showToast('📄 Print window उघडत आहे...');
 }
 
 function waDriver() {
@@ -1125,16 +1349,14 @@ function waDriver() {
   if(!phone) return;
   const msg=encodeURIComponent(`🚌 *${s.appName}*\n\n${document.getElementById('bill-period').textContent}\n${document.getElementById('bill-drv-name').textContent}\n\nएकूण देय: *${document.getElementById('bill-grand').textContent}*\n\n_${s.gramName}_`);
   window.open(`https://wa.me/${phone}?text=${msg}`,'_blank');
-  showToast('📱 WhatsApp उघडत आहे...');
 }
 
 function waSarpanch() {
   const s=getSettings();
   const phone=s.srpPhone||prompt('सरपंचाचा नंबर (91 सहित):');
   if(!phone) return;
-  const msg=encodeURIComponent(`🛡️ *${s.gramName} — वाहन बिल अहवाल*\n\n${document.getElementById('bill-period').textContent}\n${document.getElementById('bill-drv-name').textContent}\n\nएकूण देय: *${document.getElementById('bill-grand').textContent}*\n\nकृपया मंजुरी द्यावी.`);
+  const msg=encodeURIComponent(`🛡️ *${s.gramName} — वाहन बिल*\n\n${document.getElementById('bill-period').textContent}\n${document.getElementById('bill-drv-name').textContent}\n\nएकूण देय: *${document.getElementById('bill-grand').textContent}*\n\nकृपया मंजुरी द्यावी.`);
   window.open(`https://wa.me/${phone}?text=${msg}`,'_blank');
-  showToast('📱 सरपंचाला WhatsApp...');
 }
 
 // ================================================================
@@ -1161,29 +1383,21 @@ function showDevTab(tab) {
 function loadSettingsForm() {
   const s=getSettings();
   const set=(id,v)=>{ const el=document.getElementById(id); if(el) el.value=v||''; };
-  set('cfg-app-name',s.appName);
-  set('cfg-tagline',s.tagline);
-  set('cfg-logo',s.logo);
-  set('cfg-gram-name',s.gramName);
-  set('cfg-color',s.color);
-  set('cfg-default-rate',s.defaultRate);
+  set('cfg-app-name',s.appName); set('cfg-tagline',s.tagline); set('cfg-logo',s.logo);
+  set('cfg-gram-name',s.gramName); set('cfg-color',s.color);
+  set('cfg-trip-rate',s.tripRate||500);
+  set('cfg-stages',s.stages||'सुरुवात,शेवट');
   set('cfg-fence',s.fenceMeters);
   set('cfg-script-url',s.scriptUrl);
-  set('cfg-drv-phone',s.drvPhone);
-  set('cfg-srp-phone',s.srpPhone);
-  set('cfg-dev-id',s.devId);
-  set('cfg-dev-pass','');
+  set('cfg-drv-phone',s.drvPhone); set('cfg-srp-phone',s.srpPhone);
+  set('cfg-dev-id',s.devId); set('cfg-dev-pass','');
   const tog=document.getElementById('tog-autosync');
   if(tog) tog.classList.toggle('on',!!s.autoSync);
 }
 
 function toggleSetting(key) {
   const s=getSettings();
-  if(key==='autosync') {
-    s.autoSync=!s.autoSync;
-    const tog=document.getElementById('tog-autosync');
-    if(tog) tog.classList.toggle('on',s.autoSync);
-  }
+  if(key==='autosync'){ s.autoSync=!s.autoSync; const tog=document.getElementById('tog-autosync'); if(tog) tog.classList.toggle('on',s.autoSync); }
   DB.set('settings',s);
 }
 
@@ -1195,36 +1409,32 @@ function saveAllSettings() {
   s.logo=get('cfg-logo')||s.logo;
   s.gramName=get('cfg-gram-name')||s.gramName;
   s.color=get('cfg-color')||s.color;
-  s.defaultRate=parseInt(get('cfg-default-rate'))||s.defaultRate;
+  s.tripRate=parseInt(get('cfg-trip-rate'))||s.tripRate;
+  s.stages=get('cfg-stages')||s.stages;
   s.fenceMeters=parseInt(get('cfg-fence'))||s.fenceMeters;
-  s.scriptUrl=get('cfg-script-url');
-  s.drvPhone=get('cfg-drv-phone');
-  s.srpPhone=get('cfg-srp-phone');
-  const newDevId=get('cfg-dev-id');
-  const newDevPass=get('cfg-dev-pass');
-  if(newDevId) s.devId=newDevId;
-  if(newDevPass) s.devPass=newDevPass;
+  s.scriptUrl=get('cfg-script-url')||DEF_SETTINGS.scriptUrl;
+  s.drvPhone=get('cfg-drv-phone'); s.srpPhone=get('cfg-srp-phone');
+  const newId=get('cfg-dev-id'), newPass=get('cfg-dev-pass');
+  if(newId) s.devId=newId;
+  if(newPass) s.devPass=newPass;
   DB.set('settings',s);
   applySettings();
   setTxt('dev-app-name',s.appName+' — Dev');
-  showToast('✅ Settings सेव्ह झाल्या! सर्व ठिकाणी लागू झाल्या.');
-  checkDevHint();
+  showToast('✅ Settings सेव्ह झाल्या!');
 }
 
 function exportSettings() {
-  const data={ settings:getSettings(), users:DB.get('users'), stops:DB.get('stops') };
+  const data={settings:getSettings(),users:DB.get('users'),stops:DB.get('stops')};
   const b=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(b);
-  a.download='gram_gaadi_settings.json'; a.click();
+  const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='gram_gaadi_settings.json'; a.click();
   showToast('📤 Settings export झाल्या!');
 }
 
-// USERS
 function renderDevUsers() {
   const users=DB.get('users')||DEF_USERS;
   const el=document.getElementById('dev-user-list');
   if(!el) return;
-  if(!users.length){ el.innerHTML='<div class="empty"><div class="empty-icon">👥</div><div class="empty-text">कोणतेही users नाहीत</div></div>'; return; }
+  if(!users.length){ el.innerHTML='<div class="empty"><div class="empty-icon">👥</div><div class="empty-text">Users नाहीत</div></div>'; return; }
   el.innerHTML=users.map(u=>`
     <div class="driver-card">
       <div class="d-avatar" style="background:${u.role==='admin'?'var(--amber-light)':'var(--primary-light)'};color:${u.role==='admin'?'var(--amber)':'var(--primary)'};">${u.name.charAt(0)}</div>
@@ -1242,7 +1452,7 @@ function saveNewUser() {
   if(!id||users.find(u=>u.id===id)){ showToast('❌ ID रिकामा किंवा आधीच आहे'); return; }
   const name=document.getElementById('nu-name').value.trim();
   if(!name){ showToast('❌ नाव भरा'); return; }
-  users.push({ id, pass:document.getElementById('nu-pass').value, role:document.getElementById('nu-role').value, name, phone:document.getElementById('nu-phone').value });
+  users.push({id, pass:document.getElementById('nu-pass').value, role:document.getElementById('nu-role').value, name, phone:document.getElementById('nu-phone').value});
   DB.set('users',users);
   closeModal('modal-adduser');
   ['nu-name','nu-id','nu-pass','nu-phone'].forEach(i=>document.getElementById(i).value='');
@@ -1252,13 +1462,10 @@ function saveNewUser() {
 
 function deleteUser(id) {
   if(!confirm(`'${id}' ला delete करायचे?`)) return;
-  const users=(DB.get('users')||[]).filter(u=>u.id!==id);
-  DB.set('users',users);
-  renderDevUsers();
-  showToast('🗑️ User delete झाला');
+  DB.set('users',(DB.get('users')||[]).filter(u=>u.id!==id));
+  renderDevUsers(); showToast('🗑️ User delete झाला');
 }
 
-// STOPS
 function renderDevStops() {
   const stops=DB.get('stops')||DEF_STOPS;
   const el=document.getElementById('dev-stops-list');
@@ -1267,14 +1474,10 @@ function renderDevStops() {
   el.innerHTML=stops.map(s=>`
     <div class="loc-item">
       <div class="flex-space">
-        <div>
-          <div class="loc-name">📍 ${s.name}</div>
-          <div class="loc-coords">${s.lat.toFixed(5)}, ${s.lng.toFixed(5)}</div>
-          <div class="loc-rate">₹${s.rate}/फेरी</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
+        <div><div class="loc-name">📍 ${s.name}</div><div class="loc-coords">${s.lat}, ${s.lng}</div></div>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <a href="https://maps.google.com/?q=${s.lat},${s.lng}" target="_blank" class="btn btn-outline btn-sm" style="text-decoration:none;">🗺️</a>
           <button class="btn btn-red btn-sm" onclick="deleteStop(${s.id})">🗑️</button>
-          <a href="https://maps.google.com/?q=${s.lat},${s.lng}" target="_blank" class="btn btn-outline btn-sm" style="text-decoration:none;font-size:11px;">🗺️ Maps</a>
         </div>
       </div>
     </div>`).join('');
@@ -1284,39 +1487,34 @@ function addStop() {
   const name=document.getElementById('loc-name').value.trim();
   const lat=parseFloat(document.getElementById('loc-lat').value);
   const lng=parseFloat(document.getElementById('loc-lng').value);
-  const rate=parseInt(document.getElementById('loc-rate').value);
-  if(!name||isNaN(lat)||isNaN(lng)||isNaN(rate)){ showToast('⚠️ सर्व माहिती भरा'); return; }
+  if(!name||isNaN(lat)||isNaN(lng)){ showToast('⚠️ नाव, Lat, Lng भरा'); return; }
   const stops=DB.get('stops')||DEF_STOPS;
-  stops.push({id:Date.now(),name,lat,lng,rate});
+  stops.push({id:Date.now(),name,lat,lng});
   DB.set('stops',stops);
-  ['loc-name','loc-lat','loc-lng','loc-rate'].forEach(i=>document.getElementById(i).value='');
-  renderDevStops();
-  showToast('✅ थांबा जोडला!');
+  ['loc-name','loc-lat','loc-lng'].forEach(i=>document.getElementById(i).value='');
+  renderDevStops(); showToast('✅ थांबा जोडला!');
 }
 
 function deleteStop(id) {
   if(!confirm('हा थांबा delete करायचा?')) return;
-  const stops=(DB.get('stops')||[]).filter(s=>s.id!==id);
-  DB.set('stops',stops);
-  renderDevStops();
-  showToast('🗑️ थांबा delete झाला');
+  DB.set('stops',(DB.get('stops')||[]).filter(s=>s.id!==id));
+  renderDevStops(); showToast('🗑️ थांबा delete झाला');
 }
 
-// DATA
 function renderDevData() {
   const trips=DB.get('trips')||[];
   const el=document.getElementById('dev-data-stats');
   if(el) el.innerHTML=`
     <div class="stat-box"><div class="stat-num">${trips.length}</div><div class="stat-lbl">एकूण Trips</div></div>
     <div class="stat-box"><div class="stat-num">₹${trips.reduce((s,t)=>s+t.amount,0)}</div><div class="stat-lbl">एकूण रक्कम</div></div>
-    <div class="stat-box"><div class="stat-num">${trips.filter(t=>t.synced).length}</div><div class="stat-lbl">Synced ✅</div></div>
-    <div class="stat-box"><div class="stat-num">${trips.filter(t=>!t.synced).length}</div><div class="stat-lbl">Pending ⏳</div></div>`;
+    <div class="stat-box"><div class="stat-num">${trips.filter(t=>t.status==='paid').length}</div><div class="stat-lbl">Paid ✅</div></div>
+    <div class="stat-box"><div class="stat-num">${trips.filter(t=>t.status==='complete').length}</div><div class="stat-lbl">येणे ⏳</div></div>`;
   const pr=document.getElementById('dev-trips-preview');
   if(pr){
     if(!trips.length){ pr.innerHTML='<div class="empty"><div class="empty-icon">📊</div><div class="empty-text">अजून data नाही</div></div>'; return; }
     pr.innerHTML=`<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;">
-      <thead><tr style="background:var(--primary-light)"><th style="padding:6px;color:var(--primary)">तारीख</th><th style="padding:6px;color:var(--primary)">चालक</th><th style="padding:6px;color:var(--primary)">थांबा</th><th style="padding:6px;color:var(--primary)">₹</th><th style="padding:6px;color:var(--primary)">Sync</th></tr></thead>
-      <tbody>${trips.slice(-15).reverse().map(t=>`<tr style="border-bottom:1px solid var(--gray2)"><td style="padding:6px">${t.date}</td><td style="padding:6px">${t.driverName}</td><td style="padding:6px">${t.stopName}</td><td style="padding:6px;font-weight:700;color:var(--primary)">₹${t.amount}</td><td style="padding:6px">${t.synced?'✅':'⏳'}</td></tr>`).join('')}</tbody>
+      <thead><tr style="background:var(--primary-light)"><th style="padding:6px;color:var(--primary)">तारीख</th><th style="padding:6px;color:var(--primary)">चालक</th><th style="padding:6px;color:var(--primary)">Route</th><th style="padding:6px;color:var(--primary)">₹</th><th style="padding:6px;color:var(--primary)">Status</th></tr></thead>
+      <tbody>${trips.slice(-15).reverse().map(t=>`<tr style="border-bottom:1px solid var(--gray2)"><td style="padding:6px">${t.date}</td><td style="padding:6px">${t.driverName}</td><td style="padding:6px">${t.fromName}→${t.toName}</td><td style="padding:6px;font-weight:700;color:var(--primary)">₹${t.amount}</td><td style="padding:6px">${t.status}</td></tr>`).join('')}</tbody>
     </table></div>`;
   }
 }
@@ -1329,34 +1527,32 @@ function exportJSON() {
   showToast('📤 Data export झाला!');
 }
 
-function clearTrips() {
-  if(!confirm('⚠️ सर्व trips delete करायचे? हे पूर्ववत होणार नाही!')) return;
-  DB.set('trips',[]);
-  renderDevData();
-  updateSyncBadge();
-  showToast('🗑️ सर्व trips clear झाल्या');
+function clearAllData() {
+  if(!confirm('⚠️ सर्व trips, active trip delete होईल. हे पूर्ववत होणार नाही!')) return;
+  DB.set('trips',[]); DB.set('activeTrip',null);
+  renderDevData(); updateSyncBadge(); showToast('🗑️ सर्व data clear झाला');
 }
 
 // ================================================================
 // GOOGLE SHEETS SYNC
 // ================================================================
-async function syncEntry(entry) {
+async function syncTrip(trip) {
   const s=getSettings();
   if(!s.scriptUrl) return;
   try {
     await fetch(s.scriptUrl, {
       method:'POST', mode:'no-cors',
       headers:{'Content-Type':'text/plain'},
-      body:JSON.stringify({action:'addTrip',trip:{
-        id:entry.id, date:entry.date, time:entry.time,
-        driverId:entry.driverId, driverName:entry.driverName,
-        stopName:entry.stopName, amount:entry.amount,
-        lat:entry.lat||0, lng:entry.lng||0,
-        month:entry.month+1, year:entry.year
+      body:JSON.stringify({action:'addTrip', trip:{
+        id:trip.id, date:trip.date, time:new Date(trip.id).toLocaleTimeString('mr-IN'),
+        driverId:trip.driverId, driverName:trip.driverName,
+        stopName:trip.fromName+' → '+trip.toName,
+        amount:trip.amount, lat:0, lng:0,
+        month:trip.month+1, year:trip.year
       }})
     });
     const trips=DB.get('trips')||[];
-    const i=trips.findIndex(t=>t.id===entry.id);
+    const i=trips.findIndex(t=>t.id===trip.id);
     if(i!==-1){ trips[i].synced=true; DB.set('trips',trips); }
     updateSyncBadge();
   } catch(e){ console.warn('Sync error:',e); }
@@ -1364,47 +1560,43 @@ async function syncEntry(entry) {
 
 async function syncAllNow() {
   const s=getSettings();
-  if(!s.scriptUrl){ showToast('⚠️ Script URL नाही — Settings मध्ये टाका'); return; }
-  const pending=(DB.get('trips')||[]).filter(t=>!t.synced);
-  if(!pending.length){ showToast('✅ सर्व data आधीच sync झाला!'); return; }
-  showToast(`🔄 ${pending.length} entries sync होत आहेत...`);
+  if(!s.scriptUrl){ showToast('⚠️ Script URL नाही'); return; }
+  const pending=(DB.get('trips')||[]).filter(t=>!t.synced && t.status!=='active');
+  if(!pending.length){ showToast('✅ सर्व data sync झाला!'); return; }
+  showToast(`🔄 ${pending.length} trips sync होत आहेत...`);
   try {
     await fetch(s.scriptUrl, {
       method:'POST', mode:'no-cors',
       headers:{'Content-Type':'text/plain'},
-      body:JSON.stringify({action:'syncBulk',trips:pending.map(t=>({
-        id:t.id, date:t.date, time:t.time, driverId:t.driverId,
-        driverName:t.driverName, stopName:t.stopName, amount:t.amount,
-        lat:t.lat||0, lng:t.lng||0, month:t.month+1, year:t.year
+      body:JSON.stringify({action:'syncBulk', trips:pending.map(t=>({
+        id:t.id, date:t.date, time:new Date(t.id).toLocaleTimeString('mr-IN'),
+        driverId:t.driverId, driverName:t.driverName,
+        stopName:t.fromName+' → '+t.toName,
+        amount:t.amount, lat:0, lng:0, month:t.month+1, year:t.year
       }))})
     });
     const trips=DB.get('trips')||[];
     const ids=new Set(pending.map(t=>t.id));
     trips.forEach(t=>{ if(ids.has(t.id)) t.synced=true; });
     DB.set('trips',trips);
-    updateSyncBadge();
-    renderDevData();
-    showToast(`✅ ${pending.length} entries sync झाल्या!`);
+    updateSyncBadge(); renderDevData();
+    showToast(`✅ ${pending.length} trips sync झाल्या!`);
   } catch(e){ showToast('❌ Sync failed — internet तपासा'); }
 }
-
-async function syncSheets() { await syncAllNow(); }
 
 async function testScript() {
   const s=getSettings();
   if(!s.scriptUrl){ showToast('⚠️ Script URL नाही'); return; }
-  showToast('🔄 Connection test करत आहे...');
+  showToast('🔄 Connection test...');
   try {
     const r=await fetch(s.scriptUrl+'?test=1');
     const d=await r.json();
     showToast('✅ Connected: '+(d.status||'OK'));
-  } catch(e){
-    showToast('⚠️ Test झाले (CORS normal आहे — script काम करते)');
-  }
+  } catch(e){ showToast('⚠️ Test झाले (CORS normal — script काम करते)'); }
 }
 
 function updateSyncBadge() {
-  const pending=(DB.get('trips')||[]).filter(t=>!t.synced).length;
+  const pending=(DB.get('trips')||[]).filter(t=>!t.synced&&t.status!=='active').length;
   const b=document.getElementById('sync-badge');
   if(pending>0){ b.textContent=`⏳ ${pending} pending`; b.classList.add('show'); }
   else b.classList.remove('show');
@@ -1431,7 +1623,7 @@ function setupManifest() {
   document.getElementById('manifest-link').href=URL.createObjectURL(b);
 }
 
-// Enter key login
+// Enter key
 document.getElementById('inp-pass').addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
 document.getElementById('inp-uid').addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('inp-pass').focus(); });
 
