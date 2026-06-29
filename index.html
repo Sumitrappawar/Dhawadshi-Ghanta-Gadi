@@ -384,6 +384,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         </div>
       </div>
       <button class="btn btn-primary btn-full" id="btn-savephoto" style="display:none;" onclick="saveStagePhoto()">✅ Stage फोटो सेव्ह करा</button>
+      <div id="photo-size-info" style="display:none;background:var(--primary-light);color:var(--primary);border-radius:8px;padding:8px 12px;font-size:12px;font-weight:600;margin-top:8px;text-align:center;"></div>
       <div class="info-box mt-8" id="stage-info-box">⚠️ फोटो फक्त ठरलेल्या थांब्याच्या <strong id="fence-dist-lbl">10</strong> मीटरच्या आत काढता येईल.</div>
     </div>
   </div>
@@ -478,9 +479,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     </div>
   </div>
 
+  <!-- PHOTOS TAB -->
+  <div class="content tab-panel" id="adm-photos-tab">
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="showAdmPhotoFilter('all')">सर्व</button>
+      <button class="tab-btn" onclick="showAdmPhotoFilter('today')">आज</button>
+      <button class="tab-btn" onclick="showAdmPhotoFilter('pending')">येणे</button>
+    </div>
+    <div id="adm-photos-list"></div>
+  </div>
+
   <nav class="bottom-nav" id="adm-nav">
     <button class="nav-item active" onclick="showAdmTab('dash')"><div class="nav-icon">📊</div>Dashboard</button>
     <button class="nav-item" onclick="showAdmTab('trips-tab')"><div class="nav-icon">🚍</div>Trips</button>
+    <button class="nav-item" onclick="showAdmTab('photos-tab')"><div class="nav-icon">📸</div>फोटो</button>
     <button class="nav-item" onclick="showAdmTab('bill')"><div class="nav-icon">📋</div>बिल</button>
   </nav>
 </div>
@@ -531,6 +543,37 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
       <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
         <div class="sr-label">Geo-fence अंतर (मीटर)</div>
         <input class="sr-input" id="cfg-fence" type="number" placeholder="10">
+      </div>
+    </div>
+
+    <div class="settings-group">
+      <div class="sg-title">📸 Photo Settings</div>
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+        <div class="sr-label">Maximum फोटो Size (KB)</div>
+        <input class="sr-input" id="cfg-photo-maxkb" type="number" placeholder="150">
+        <div style="font-size:11px;color:var(--text3);">कमी KB = कमी quality पण कमी storage. उदा: 100, 150, 200</div>
+      </div>
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+        <div class="sr-label">Maximum Width (pixels)</div>
+        <input class="sr-input" id="cfg-photo-maxwidth" type="number" placeholder="1024">
+        <div style="font-size:11px;color:var(--text3);">उदा: 800 (छोटा), 1024 (मध्यम), 1920 (मोठा)</div>
+      </div>
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+        <div class="sr-label">Initial Quality (0.1 ते 1.0)</div>
+        <input class="sr-input" id="cfg-photo-quality" type="number" step="0.05" min="0.1" max="1.0" placeholder="0.75">
+        <div style="font-size:11px;color:var(--text3);">0.5 = कमी quality, 0.75 = चांगले, 1.0 = जास्तीत जास्त</div>
+      </div>
+      <div class="setting-row" style="padding-top:10px;padding-bottom:10px;">
+        <div class="sr-left"><div class="sr-label">☁️ Google Drive Upload</div><div class="sr-sub">फोटो Drive वर आपोआप save होईल</div></div>
+        <button class="toggle" id="tog-photodrive" onclick="toggleSetting('photodrive')"></button>
+      </div>
+      <div class="setting-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+        <div class="sr-label">Google Drive Folder ID (optional)</div>
+        <input class="sr-input" id="cfg-drive-folder" placeholder="1ABC...xyz (Folder URL मधील ID)">
+        <div style="font-size:11px;color:var(--text3);">Drive folder उघडा → URL मधील /folders/XXXXX हा ID copy करा. रिकामे ठेवल्यास My Drive मध्ये जाईल.</div>
+      </div>
+      <div class="setting-row" style="padding:10px 14px;">
+        <button class="btn btn-outline btn-sm" onclick="testPhotoCompression()">🧪 Compression Test करा</button>
       </div>
     </div>
 
@@ -697,7 +740,12 @@ const DEF_SETTINGS = {
   drvPhone: '',
   srpPhone: '',
   devId: 'dev1',
-  devPass: 'dev@2024'
+  devPass: 'dev@2024',
+  photoMaxKB: 150,
+  photoMaxWidth: 1024,
+  photoQuality: 0.75,
+  photoDrive: false,
+  driveFolderId: ''
 };
 
 const DEF_USERS = [
@@ -722,8 +770,9 @@ let currentUser = null;
 let gpsWatchId = null;
 let camStream = null;
 let capturedPhoto = null;
+let capturedPhotoInfo = null;
 let currentGPS = null;
-let activeTrip = null;  // { id, driverId, driverName, fromStop, toStop, stages[], stagePhotos{}, status, date, amount, ... }
+let activeTrip = null;
 let currentPayTripId = null;
 
 // ================================================================
@@ -1024,6 +1073,7 @@ function refreshTripUI() {
 
 function resetCamUI() {
   capturedPhoto = null;
+  capturedPhotoInfo = null;
   document.getElementById('cam-preview').style.display = 'none';
   document.getElementById('cam-ph').style.display = 'flex';
   document.getElementById('cam-video').style.display = 'none';
@@ -1031,6 +1081,8 @@ function resetCamUI() {
   document.getElementById('btn-capture').style.display = 'none';
   document.getElementById('btn-retake').style.display = 'none';
   document.getElementById('btn-savephoto').style.display = 'none';
+  const inf = document.getElementById('photo-size-info');
+  if (inf) inf.style.display = 'none';
 }
 
 // ================================================================
@@ -1052,6 +1104,52 @@ async function startCam() {
   } catch(e) { showToast('❌ कॅमेरा उपलब्ध नाही: '+e.message); }
 }
 
+// ================================================================
+// PHOTO COMPRESSION — Auto size कमी करतो Developer settings नुसार
+// ================================================================
+function compressPhoto(canvas, targetKB, maxWidth, initQuality) {
+  // Step 1: Resize if wider than maxWidth
+  let w = canvas.width, h = canvas.height;
+  if (w > maxWidth) {
+    h = Math.round(h * maxWidth / w);
+    w = maxWidth;
+  }
+  const resized = document.createElement('canvas');
+  resized.width = w; resized.height = h;
+  resized.getContext('2d').drawImage(canvas, 0, 0, w, h);
+
+  const targetBytes = targetKB * 1024;
+  let quality = Math.min(Math.max(initQuality || 0.75, 0.1), 1.0);
+  let dataUrl = resized.toDataURL('image/jpeg', quality);
+  let size = Math.round((dataUrl.length * 3) / 4); // approx bytes
+
+  // Step 2: Iteratively reduce quality until under target size
+  let attempts = 0;
+  while (size > targetBytes && quality > 0.1 && attempts < 12) {
+    quality = Math.max(quality - 0.08, 0.1);
+    dataUrl = resized.toDataURL('image/jpeg', quality);
+    size = Math.round((dataUrl.length * 3) / 4);
+    attempts++;
+  }
+
+  // Step 3: If still too big, shrink canvas further
+  if (size > targetBytes) {
+    let shrink = 0.8;
+    while (size > targetBytes && shrink > 0.3 && attempts < 20) {
+      const sw = Math.round(w * shrink), sh = Math.round(h * shrink);
+      const tmp = document.createElement('canvas');
+      tmp.width = sw; tmp.height = sh;
+      tmp.getContext('2d').drawImage(resized, 0, 0, sw, sh);
+      dataUrl = tmp.toDataURL('image/jpeg', 0.65);
+      size = Math.round((dataUrl.length * 3) / 4);
+      shrink -= 0.1; attempts++;
+    }
+  }
+
+  const finalKB = Math.round(size / 1024);
+  return { dataUrl, sizeKB: finalKB, quality: Math.round(quality * 100), width: w, height: h };
+}
+
 function capturePhoto() {
   if (!activeTrip) return;
   if (!isInTripFence()) {
@@ -1059,19 +1157,39 @@ function capturePhoto() {
     checkTripFence();
     return;
   }
-  const v=document.getElementById('cam-video');
-  const c=document.getElementById('cam-canvas');
-  c.width=v.videoWidth||640; c.height=v.videoHeight||480;
-  c.getContext('2d').drawImage(v,0,0);
-  capturedPhoto = c.toDataURL('image/jpeg',0.72);
-  const p=document.getElementById('cam-preview');
-  p.src=capturedPhoto; p.style.display='block';
-  v.style.display='none';
-  document.getElementById('btn-capture').style.display='none';
-  document.getElementById('btn-retake').style.display='block';
-  document.getElementById('btn-savephoto').style.display='block';
-  if(camStream){ camStream.getTracks().forEach(t=>t.stop()); camStream=null; }
-  showToast('📸 फोटो तयार! सेव्ह करा.');
+  const v = document.getElementById('cam-video');
+  const c = document.getElementById('cam-canvas');
+  c.width = v.videoWidth || 640; c.height = v.videoHeight || 480;
+  c.getContext('2d').drawImage(v, 0, 0);
+
+  // Auto compression
+  const s = getSettings();
+  const maxKB    = s.photoMaxKB    || 150;
+  const maxWidth = s.photoMaxWidth || 1024;
+  const quality  = s.photoQuality  || 0.75;
+
+  showToast('🔄 फोटो compress होत आहे...');
+  setTimeout(() => {
+    const result = compressPhoto(c, maxKB, maxWidth, quality);
+    capturedPhoto = result.dataUrl;
+    capturedPhotoInfo = result;
+
+    const p = document.getElementById('cam-preview');
+    p.src = capturedPhoto; p.style.display = 'block';
+    v.style.display = 'none';
+    document.getElementById('btn-capture').style.display = 'none';
+    document.getElementById('btn-retake').style.display = 'block';
+    document.getElementById('btn-savephoto').style.display = 'block';
+    if (camStream) { camStream.getTracks().forEach(t => t.stop()); camStream = null; }
+
+    // Photo info दाखवा
+    const infoEl = document.getElementById('photo-size-info');
+    if (infoEl) {
+      infoEl.style.display = 'block';
+      infoEl.textContent = `📸 ${result.sizeKB} KB • ${result.width}×${result.height}px • Quality: ${result.quality}%`;
+    }
+    showToast(`📸 फोटो तयार! आकार: ${result.sizeKB} KB`);
+  }, 100);
 }
 
 function retakeCam() {
@@ -1088,19 +1206,58 @@ function saveStagePhoto() {
   if (!capturedPhoto || !activeTrip) return;
   const idx = activeTrip.completedStages.length;
   const stageName = activeTrip.stages[idx];
-  // Save photo for this stage
+
+  // Photo + info save
   activeTrip.stagePhotos[stageName] = capturedPhoto;
+  activeTrip.stagePhotoInfo = activeTrip.stagePhotoInfo || {};
+  activeTrip.stagePhotoInfo[stageName] = capturedPhotoInfo || {};
   activeTrip.stageGPS[stageName] = currentGPS ? {...currentGPS} : null;
   activeTrip.completedStages.push(stageName);
   capturedPhoto = null;
+  capturedPhotoInfo = null;
 
-  // All stages done?
+  // Google Drive upload (settings मध्ये चालू असल्यास)
+  const s = getSettings();
+  if (s.photoDrive && s.scriptUrl) {
+    uploadPhotoToDrive(activeTrip, stageName, activeTrip.stagePhotos[stageName]);
+  }
+
   if (activeTrip.completedStages.length >= activeTrip.stages.length) {
     completeTrip();
   } else {
     DB.set('activeTrip', activeTrip);
     showToast(`✅ Stage "${stageName}" सेव्ह झाला! पुढचा stage करा.`);
     refreshTripUI();
+  }
+}
+
+// Google Drive ला फोटो upload
+async function uploadPhotoToDrive(trip, stageName, dataUrl) {
+  const s = getSettings();
+  if (!s.scriptUrl) return;
+  try {
+    const base64 = dataUrl.split(',')[1];
+    const fileName = `Trip_${trip.id}_${stageName}_${trip.driverName}_${trip.date}.jpg`.replace(/[^a-zA-Z0-9_\-\.]/g, '_');
+    await fetch(s.scriptUrl, {
+      method: 'POST', mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain'},
+      body: JSON.stringify({
+        action: 'uploadPhoto',
+        photo: {
+          fileName,
+          base64,
+          tripId:     trip.id,
+          driverName: trip.driverName,
+          route:      trip.fromName + ' → ' + trip.toName,
+          stageName,
+          date:       trip.date,
+          folderId:   s.driveFolderId || ''
+        }
+      })
+    });
+    showToast(`☁️ Drive वर "${stageName}" फोटो upload झाला!`);
+  } catch(e) {
+    console.warn('Drive upload error:', e);
   }
 }
 
@@ -1201,11 +1358,81 @@ function showAdmTab(tab) {
   document.querySelectorAll('#screen-admin .tab-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('adm-'+tab).classList.add('active');
   document.querySelectorAll('#adm-nav .nav-item').forEach((b,i)=>{
-    b.classList.toggle('active',['dash','trips-tab','bill'][i]===tab);
+    b.classList.toggle('active',['dash','trips-tab','photos-tab','bill'][i]===tab);
   });
   if(tab==='dash') refreshAdmDash();
   if(tab==='trips-tab') { refreshAdmTrips(); showAdmTripsTab('active'); }
+  if(tab==='photos-tab') { refreshAdmPhotos('all'); }
   if(tab==='bill') populateBillDrivers();
+}
+
+function showAdmPhotoFilter(filter) {
+  document.querySelectorAll('#adm-photos-tab .tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active',['all','today','pending'][i]===filter);
+  });
+  refreshAdmPhotos(filter);
+}
+
+function refreshAdmPhotos(filter) {
+  const el = document.getElementById('adm-photos-list');
+  if (!el) return;
+  let trips = (DB.get('trips')||[]).filter(t=>t.stagePhotos && Object.keys(t.stagePhotos).length > 0);
+  const today = new Date().toLocaleDateString('mr-IN');
+  if (filter === 'today')   trips = trips.filter(t=>t.date===today);
+  if (filter === 'pending') trips = trips.filter(t=>t.status==='complete');
+  trips = trips.reverse();
+
+  if (!trips.length) {
+    el.innerHTML='<div class="empty"><div class="empty-icon">📸</div><div class="empty-text">फोटो उपलब्ध नाहीत</div></div>';
+    return;
+  }
+
+  el.innerHTML = trips.map(t=>{
+    const photos = Object.entries(t.stagePhotos);
+    const info = t.stagePhotoInfo || {};
+    return `<div class="card" style="margin-bottom:12px;">
+      <div class="flex-space" style="margin-bottom:8px;">
+        <div>
+          <div style="font-size:14px;font-weight:800;">${t.fromName} → ${t.toName}</div>
+          <div style="font-size:11px;color:var(--text3);">👤 ${t.driverName} • ${t.date}</div>
+        </div>
+        <span class="badge ${t.status==='paid'?'badge-green':t.status==='complete'?'badge-amber':'badge-blue'}">${t.status==='paid'?'💚 Paid':'⏳ येणे'}</span>
+      </div>
+      <div class="photo-grid">
+        ${photos.map(([stage, dataUrl])=>{
+          const kb = info[stage]?.sizeKB || '?';
+          const w  = info[stage]?.width  || '';
+          const q  = info[stage]?.quality|| '';
+          return `<div class="photo-card">
+            <img src="${dataUrl}" alt="${stage}" onclick="viewFullPhoto('${t.id}','${stage}')" style="cursor:pointer;">
+            <div class="photo-card-info">
+              <div class="pci-stop">${stage}</div>
+              <div class="pci-time">${kb}KB${w?' • '+w+'px':''}</div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+      <a href="${getSettings().sheetUrl||'#'}" target="_blank" class="btn btn-outline btn-full btn-sm mt-8" style="text-decoration:none;font-size:12px;">📊 Sheets मध्ये बघा</a>
+    </div>`;
+  }).join('');
+}
+
+function viewFullPhoto(tripId, stage) {
+  const trips = DB.get('trips')||[];
+  const trip = trips.find(t=>t.id==tripId);
+  if (!trip || !trip.stagePhotos[stage]) return;
+  const w = window.open('','_blank');
+  const info = (trip.stagePhotoInfo||{})[stage]||{};
+  w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${trip.driverName} - ${stage}</title>
+  <style>body{margin:0;background:#000;display:flex;flex-direction:column;align-items:center;min-height:100vh;}
+  img{max-width:100%;max-height:90vh;object-fit:contain;}
+  .info{color:white;padding:12px;font-family:sans-serif;font-size:13px;text-align:center;}</style></head>
+  <body>
+  <div class="info">📍 ${trip.fromName} → ${trip.toName} | Stage: ${stage} | 👤 ${trip.driverName} | ${trip.date}</div>
+  <img src="${trip.stagePhotos[stage]}" alt="${stage}">
+  <div class="info">${info.sizeKB||'?'}KB • ${info.width||'?'}×${info.height||'?'}px • Quality: ${info.quality||'?'}%</div>
+  </body></html>`);
+  w.document.close();
 }
 
 function refreshAdmDash() {
@@ -1388,6 +1615,13 @@ function loadSettingsForm() {
   set('cfg-trip-rate',s.tripRate||500);
   set('cfg-stages',s.stages||'सुरुवात,शेवट');
   set('cfg-fence',s.fenceMeters);
+  // Photo settings
+  set('cfg-photo-maxkb',   s.photoMaxKB    || 150);
+  set('cfg-photo-maxwidth',s.photoMaxWidth  || 1024);
+  set('cfg-photo-quality', s.photoQuality  || 0.75);
+  set('cfg-drive-folder',  s.driveFolderId || '');
+  const togDrive = document.getElementById('tog-photodrive');
+  if (togDrive) togDrive.classList.toggle('on', !!s.photoDrive);
   set('cfg-script-url',s.scriptUrl);
   set('cfg-drv-phone',s.drvPhone); set('cfg-srp-phone',s.srpPhone);
   set('cfg-dev-id',s.devId); set('cfg-dev-pass','');
@@ -1398,6 +1632,7 @@ function loadSettingsForm() {
 function toggleSetting(key) {
   const s=getSettings();
   if(key==='autosync'){ s.autoSync=!s.autoSync; const tog=document.getElementById('tog-autosync'); if(tog) tog.classList.toggle('on',s.autoSync); }
+  if(key==='photodrive'){ s.photoDrive=!s.photoDrive; const tog=document.getElementById('tog-photodrive'); if(tog) tog.classList.toggle('on',s.photoDrive); }
   DB.set('settings',s);
 }
 
@@ -1412,6 +1647,14 @@ function saveAllSettings() {
   s.tripRate=parseInt(get('cfg-trip-rate'))||s.tripRate;
   s.stages=get('cfg-stages')||s.stages;
   s.fenceMeters=parseInt(get('cfg-fence'))||s.fenceMeters;
+  // Photo settings
+  const maxKB = parseInt(get('cfg-photo-maxkb'));
+  const maxW  = parseInt(get('cfg-photo-maxwidth'));
+  const qual  = parseFloat(get('cfg-photo-quality'));
+  if (maxKB > 0)   s.photoMaxKB    = maxKB;
+  if (maxW > 0)    s.photoMaxWidth  = maxW;
+  if (qual > 0)    s.photoQuality  = Math.min(Math.max(qual, 0.1), 1.0);
+  s.driveFolderId = get('cfg-drive-folder');
   s.scriptUrl=get('cfg-script-url')||DEF_SETTINGS.scriptUrl;
   s.drvPhone=get('cfg-drv-phone'); s.srpPhone=get('cfg-srp-phone');
   const newId=get('cfg-dev-id'), newPass=get('cfg-dev-pass');
@@ -1421,6 +1664,24 @@ function saveAllSettings() {
   applySettings();
   setTxt('dev-app-name',s.appName+' — Dev');
   showToast('✅ Settings सेव्ह झाल्या!');
+}
+
+function testPhotoCompression() {
+  const s = getSettings();
+  const maxKB = parseInt(document.getElementById('cfg-photo-maxkb')?.value) || s.photoMaxKB || 150;
+  const maxW  = parseInt(document.getElementById('cfg-photo-maxwidth')?.value) || s.photoMaxWidth || 1024;
+  const qual  = parseFloat(document.getElementById('cfg-photo-quality')?.value) || s.photoQuality || 0.75;
+  // Test canvas बनवा
+  const c = document.createElement('canvas');
+  c.width = 1920; c.height = 1080;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#1a6b3a';
+  ctx.fillRect(0, 0, 1920, 1080);
+  ctx.fillStyle = 'white';
+  ctx.font = '60px Arial';
+  ctx.fillText('Test Photo', 700, 500);
+  const result = compressPhoto(c, maxKB, maxW, qual);
+  showToast(`🧪 Test: ${result.sizeKB}KB • ${result.width}×${result.height}px • Q:${result.quality}% (Target: ${maxKB}KB)`);
 }
 
 function exportSettings() {
